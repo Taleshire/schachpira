@@ -17,6 +17,7 @@ motion/sync_to_physics = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 health = 100
+moves = 4
 initiative = 100
 strenth = 10
 
