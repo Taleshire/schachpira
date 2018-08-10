@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://character/Character.gd" type="Script" id=1]
+[ext_resource path="res://character/character.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -9,21 +9,22 @@ custom_solver_bias = 0.0
 extents = Vector2( 31, 31 )
 
 [node name="Character" type="KinematicBody2D"]
-
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
+motion/sync_to_physics = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+health = 100
+initiative = 100
+strenth = 10
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
 
