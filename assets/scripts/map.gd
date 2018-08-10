@@ -133,7 +133,8 @@ func connect_with_neighbour_at(id : int, offset : Vector2) -> void:
 	var cpos = astar.get_point_position(id)
 	var p = cpos + Vector3(offset.x, offset.y, 0)
 	if check_boundaries(p) && !astar.are_points_connected( id, flatten(Vector2(p.x, p.y)) ):
-		astar.connect_points(id, flatten(Vector2(p.x, p.y)))
+		if !tiles[id].is_blocked:
+			astar.connect_points(id, flatten(Vector2(p.x, p.y)))
 
 func disconnect_with_neighbour_at(id : int, offset : Vector2) -> void:
 	var cpos = astar.get_point_position(id)
