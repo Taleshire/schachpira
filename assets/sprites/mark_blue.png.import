@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blue_plane.png-c15d01610ba16239a481bd028fc189a4.stex"
+path="res://.import/mark_blue.png-6e76efe81cfaecde6d3827713c6472b4.stex"
 
 [deps]
 
-source_file="res://sprites/blue_plane.png"
-dest_files=[ "res://.import/blue_plane.png-c15d01610ba16239a481bd028fc189a4.stex" ]
+source_file="res://assets/sprites/mark_blue.png"
+dest_files=[ "res://.import/mark_blue.png-6e76efe81cfaecde6d3827713c6472b4.stex" ]
 
 [params]
 

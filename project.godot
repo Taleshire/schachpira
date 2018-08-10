@@ -13,13 +13,14 @@ _global_script_classes=[  ]
 [application]
 
 config/name="Schachpira"
-run/main_scene="res://level/Level.tscn"
+run/main_scene="res://assets/scenes/Level.tscn"
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=512
-window/size/height=512
+window/size/width=576
+window/size/height=576
+window/size/resizable=false
 
 [input]
 

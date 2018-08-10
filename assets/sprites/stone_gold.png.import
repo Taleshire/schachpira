@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/green_plane.png-36083ba8ec236fe714824dddd5626db1.stex"
+path="res://.import/stone_gold.png-770895b515bec290a83fd5633bd53b55.stex"
 
 [deps]
 
-source_file="res://sprites/green_plane.png"
-dest_files=[ "res://.import/green_plane.png-36083ba8ec236fe714824dddd5626db1.stex" ]
+source_file="res://assets/sprites/stone_gold.png"
+dest_files=[ "res://.import/stone_gold.png-770895b515bec290a83fd5633bd53b55.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_ground.png-d4b40bf1b3a4a2d5709dcb7965954607.stex"
+path="res://.import/tile_marble.png-cafc3ad985f7d237ef1be80bde1ec7ac.stex"
 
 [deps]
 
-source_file="res://scenery/tile_ground.png"
-dest_files=[ "res://.import/tile_ground.png-d4b40bf1b3a4a2d5709dcb7965954607.stex" ]
+source_file="res://assets/sprites/tile_marble.png"
+dest_files=[ "res://.import/tile_marble.png-cafc3ad985f7d237ef1be80bde1ec7ac.stex" ]
 
 [params]
 
@@ -25,5 +25,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

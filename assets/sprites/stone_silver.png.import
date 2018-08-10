@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/red_plane.png-47ba1e0ce5862263897d7911b13ea914.stex"
+path="res://.import/stone_silver.png-7ad85911df0c1b2ac8f83a302aeb5dee.stex"
 
 [deps]
 
-source_file="res://sprites/red_plane.png"
-dest_files=[ "res://.import/red_plane.png-47ba1e0ce5862263897d7911b13ea914.stex" ]
+source_file="res://assets/sprites/stone_silver.png"
+dest_files=[ "res://.import/stone_silver.png-7ad85911df0c1b2ac8f83a302aeb5dee.stex" ]
 
 [params]
 

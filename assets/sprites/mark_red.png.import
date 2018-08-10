@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/selection.png-eee49ba6a3511382c07533fc84cc99ef.stex"
+path="res://.import/mark_red.png-3399e5ffa5c52db693d41608743a3964.stex"
 
 [deps]
 
-source_file="res://sprites/selection.png"
-dest_files=[ "res://.import/selection.png-eee49ba6a3511382c07533fc84cc99ef.stex" ]
+source_file="res://assets/sprites/mark_red.png"
+dest_files=[ "res://.import/mark_red.png-3399e5ffa5c52db693d41608743a3964.stex" ]
 
 [params]
 
