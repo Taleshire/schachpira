@@ -4,7 +4,10 @@ onready var map = get_node("../../Map")
 onready var draw = get_node("../../UI/Draw")
 onready var level = get_node("../..")
 
-var speed : int = 300
+enum STATES {IDLE, MOVE, FIGHT}
+
+var speed : int = 250
+var direction : Vector2
 
 export(int) var HEALTH_MAX = 8
 export(int) var MOVES_MAX = 4
@@ -32,29 +35,14 @@ func _ready():
 
 
 func _process(delta):
-	if path.size() > 0 and moves > 0 and is_moving:
-		map.unblock_tile(map.flatten(map.world_to_map(position)))
-		var distance = position.distance_to(next_in_path())
-		if distance > 4:
-			set_position(position.linear_interpolate(next_in_path(), (speed * delta)/distance))
-		else:
-			print(path)
-			moves = moves - 1
-			path.remove(0)
-			draw.draw_marker()
-			if path.size() == 0:
-				is_moving = false
-				set_position(map.world_to_world_fixed(position))
-				level.active_actor = null
-	elif path.size() > 0 and moves == 0:
-		print(path)
-		set_position(map.world_to_world_fixed(position))
-		print(position)
-		is_moving = false
+	handle_movement(delta)
 
 #
 # P U B L I C   M E T H O D S
 #
+
+func get_move_direction() -> Vector2:
+	return path[0] - get_map_position()
 
 
 func get_map_position() -> Vector2:
@@ -81,6 +69,34 @@ func enlarge_sprite():
 #
 # INTERNAL METHODS
 #
+func checkpoint_reached():
+	moves -= 1
+	path.remove(0)
+	if path.size() == 0:
+		draw.draw_marker()
+		is_moving = false
+		set_position(map.world_to_world_fixed(position))
+		level.active_actor = null
+	else:
+		direction = get_move_direction()
+
+
+func handle_movement(delta):
+	if path.size() > 0 and moves > 0 and is_moving:
+		map.unblock_tile(map.flatten(map.world_to_map(position)))
+		if can_move:
+			direction = get_move_direction()
+			can_move = false
+		var velocity = direction * speed * delta
+		position += velocity
+		print(velocity)
+		if position * direction > map.map_to_world_fixed(path[0]) * direction:
+			checkpoint_reached()
+	elif path.size() > 0 and moves == 0:
+		print(path)
+		set_position(map.world_to_world_fixed(position))
+		print(position)
+		is_moving = false
 
 
 func next_in_path() -> Vector2:
