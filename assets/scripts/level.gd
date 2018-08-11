@@ -66,6 +66,7 @@ func handle_active_actor_path(destination):
 
 func set_active_actor(new_actor):
 	draw.remove_marker()
+	draw.path = []
 	if active_actor != null:
 		active_actor.reduce_sprite()
 		map.block_tile(map.flatten(active_actor.get_map_position()))

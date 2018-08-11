@@ -1,6 +1,6 @@
 extends TileMap
 
-export(int) var width = 9
+export(int) var width = 13
 export(int) var height = 9
 
 var astar = AStar.new()
@@ -11,6 +11,7 @@ var tiles : Dictionary
 
 func _ready():
 	generate_tiles()
+	block_border_tiles()
 	generate_tile_connections()
 
 
@@ -118,8 +119,14 @@ func generate_tile_connections() -> void:
 			for n in neighbors.values():
 				if check_boundaries(n) && !astar.are_points_connected(id, flatten(Vector2(n.x, n.y))):
 					#print("connected ", id, " and ", flatten(n.x, n.y))
-					astar.connect_points(id, flatten(Vector2(n.x, n.y)))
+					if !tiles[id].is_blocked and !tiles[flatten(Vector2(n.x, n.y))].is_blocked:
+						astar.connect_points(id, flatten(Vector2(n.x, n.y)))
 
+
+func block_border_tiles():
+	for id in range(width * height):
+		if tiles[id].type == 0:
+			tiles[id].is_blocked = true
 
 func flatten(map_position : Vector2) -> int:
 	return int(map_position.y) * width + int(map_position.x);
@@ -133,7 +140,7 @@ func connect_with_neighbour_at(id : int, offset : Vector2) -> void:
 	var cpos = astar.get_point_position(id)
 	var p = cpos + Vector3(offset.x, offset.y, 0)
 	if check_boundaries(p) && !astar.are_points_connected( id, flatten(Vector2(p.x, p.y)) ):
-		if !tiles[id].is_blocked:
+		if !tiles[id].is_blocked and !tiles[flatten(Vector2(p.x, p.y))].is_blocked:
 			astar.connect_points(id, flatten(Vector2(p.x, p.y)))
 
 func disconnect_with_neighbour_at(id : int, offset : Vector2) -> void:

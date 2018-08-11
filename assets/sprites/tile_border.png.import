@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_marble.png-cafc3ad985f7d237ef1be80bde1ec7ac.stex"
+path="res://.import/tile_border.png-255224b6f03406becaa551c49034794c.stex"
 
 [deps]
 
-source_file="res://assets/sprites/tile_marble.png"
-dest_files=[ "res://.import/tile_marble.png-cafc3ad985f7d237ef1be80bde1ec7ac.stex" ]
+source_file="res://assets/sprites/tile_border.png"
+dest_files=[ "res://.import/tile_border.png-255224b6f03406becaa551c49034794c.stex" ]
 
 [params]
 
