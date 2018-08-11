@@ -6,6 +6,13 @@ onready var selection = get_node("Selection")
 onready var container = get_node("MarkerContainer")
 onready var tile = get_node("Tile")
 onready var actors = get_node("../../Actors").get_children()
+onready var turn_end = get_node("TurnEnd")
+onready var turn = get_node("Turn")
+
+onready var health = get_node("ActiveActor/Health")
+onready var moves = get_node("ActiveActor/Moves")
+onready var honor = get_node("ActiveActor/Honor")
+onready var strength = get_node("ActiveActor/Strength")
 
 var move_marker = preload("res://assets/scenes/Marker.tscn")
 
@@ -13,6 +20,12 @@ var path : Array
 
 const BASE_LINE_WIDTH = 3.0
 const DRAW_COLOR = Color('#fff')
+
+
+func _ready():
+	turn.text = str("Turn: ", level.turn)
+	turn_end.text = String("Turn End")
+
 
 func _process(delta):
 	for actor in actors:
@@ -42,9 +55,23 @@ func _draw():
 		last = current
 	draw_circle(end_fixed, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
 
+
 #
 # P U B L I C   M E T H O D S
 #
+
+
+func draw_actor_stats():
+	if level.active_actor != null:
+		health.text = str("Health: ", level.active_actor.health)
+		moves.text = str("Moves: ", level.active_actor.moves)
+		honor.text = str("Honor: ", level.active_actor.honor)
+		strength.text = str("Strength: ", level.active_actor.strength)
+	else:
+		health.text = str("Health: -")
+		moves.text = str("Moves: -")
+		honor.text = str("Honor: -")
+		strength.text = str("Strength: -")
 
 
 func draw_marker():
@@ -70,3 +97,7 @@ func remove_marker():
 	var children = container.get_children()
 	for c in children:
 		c.queue_free()
+
+
+func _on_TurnEnd_button_up():
+	turn.text = String("Turn: ") + String(level.turn) 

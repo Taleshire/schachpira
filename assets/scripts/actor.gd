@@ -10,6 +10,7 @@ export(int) var HEALTH_MAX = 8
 export(int) var MOVES_MAX = 4
 export(int) var STRENGTH_MAX = 2
 export(int) var ATTACK_RANGE = 1
+export(int) var SIDE = 1
 
 var health : int
 var moves : int
@@ -62,6 +63,7 @@ func get_map_position() -> Vector2:
 
 func turn_end():
 	moves = MOVES_MAX
+	honor = honor + 1
 	can_move = true
 	can_attack = true
 

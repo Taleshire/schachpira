@@ -3,14 +3,15 @@ extends Node2D
 onready var map = get_node("Map")
 onready var actors = get_node("Actors").get_children()
 onready var draw = get_node("UI/Draw")
-
 var active_actor = null setget set_active_actor
 
+var turn : int = 1
 
 func _ready():
 	for actor in actors:
 		map.block_tile(map.flatten(map.world_to_map(actor.get_position())))
 		print(actor.name, ": ", actor.get_position())
+	set_active_actor(null)
 	set_process_input(true)
 
 
@@ -71,7 +72,14 @@ func set_active_actor(new_actor):
 		active_actor.reduce_sprite()
 		map.block_tile(map.flatten(active_actor.get_map_position()))
 	active_actor = new_actor
+	draw.draw_actor_stats()
 	print("Actor changed!: ", active_actor)
 	if active_actor != null:
 		active_actor.enlarge_sprite()
 		map.unblock_tile(map.flatten(active_actor.get_map_position()))
+
+
+func _on_TurnEnd_button_down():
+	for actor in actors:
+		actor.turn_end()
+	turn = turn + 1

@@ -20,10 +20,10 @@
 
 
 # T U R N   S Y S T E M
-#	[] add a "turn end" button
-#		[] reset moves 
-#		[] earn honor
-#		[] health / mira regeneration? 
+#	[x] add a "turn end" button
+#		[x] reset moves 
+#		[x] earn honor
+#		- health / mira regeneration? 
 
 
 # C O M B A T   S Y S T E M

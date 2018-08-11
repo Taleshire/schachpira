@@ -44,44 +44,64 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 [node name="Actor1" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 352, 416 )
+HEALTH_MAX = 10
 MOVES_MAX = 5
+STRENGTH_MAX = 1
+SIDE = 1
 
 [node name="Actor2" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 224, 416 )
+SIDE = 1
 
 [node name="Actor3" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 608, 416 )
+HEALTH_MAX = 6
 MOVES_MAX = 3
+STRENGTH_MAX = 3
+SIDE = 1
 
 [node name="Actor4" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 480, 416 )
 MOVES_MAX = 3
+SIDE = 1
 
 [node name="Foe1" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 352, 160 )
 texture = ExtResource( 5 )
-MOVES_MAX = 5
+HEALTH_MAX = 11
+STRENGTH_MAX = 1
+SIDE = 1
 
 [node name="Foe2" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 480, 160 )
 texture = ExtResource( 5 )
+HEALTH_MAX = 5
+MOVES_MAX = 5
+STRENGTH_MAX = 5
+SIDE = 1
 
 [node name="Foe3" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 608, 160 )
 texture = ExtResource( 5 )
+HEALTH_MAX = 6
 MOVES_MAX = 3
+STRENGTH_MAX = 3
+SIDE = 1
 
 [node name="Foe4" parent="Actors" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 224, 160 )
 texture = ExtResource( 5 )
+HEALTH_MAX = 12
 MOVES_MAX = 3
+STRENGTH_MAX = 1
+SIDE = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 1
@@ -119,6 +139,25 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 560.0
+margin_right = 40.0
+margin_bottom = 574.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Turn" type="Label" parent="UI/Draw"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -131,3 +170,111 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="TurnEnd" type="Button" parent="UI/Draw"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 704.0
+margin_top = 512.0
+margin_right = 832.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+
+[node name="ActiveActor" type="GridContainer" parent="UI/Draw"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 32.0
+margin_right = 46.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+columns = 1
+
+[node name="Health" type="Label" parent="UI/Draw/ActiveActor"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Moves" type="Label" parent="UI/Draw/ActiveActor"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Honor" type="Label" parent="UI/Draw/ActiveActor"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 36.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Strength" type="Label" parent="UI/Draw/ActiveActor"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="button_down" from="UI/Draw/TurnEnd" to="." method="_on_TurnEnd_button_down"]
+[connection signal="button_up" from="UI/Draw/TurnEnd" to="UI/Draw" method="_on_TurnEnd_button_up"]
