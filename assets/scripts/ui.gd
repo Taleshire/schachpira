@@ -4,6 +4,7 @@ onready var level = get_node("../..")
 onready var map = get_node("../../Map")
 onready var selection = get_node("Selection")
 onready var container = get_node("MarkerContainer")
+onready var tile = get_node("Tile")
 onready var actors = get_node("../../Actors").get_children()
 
 var move_marker = preload("res://assets/scenes/Marker.tscn")
@@ -25,8 +26,9 @@ func _process(delta):
 
 func _draw():
 	# draw selection tile
-	var tile_map_position = map.world_to_world(get_global_mouse_position())
-	selection.position = tile_map_position
+	var tile_position = map.world_to_world(get_global_mouse_position())
+	selection.position = tile_position
+	tile.text = String(selection.position)
 	# draw path
 	if not path:
 		return
