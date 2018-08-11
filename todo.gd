@@ -1,11 +1,22 @@
+# B U G S
+#	[] fix tile blocking when selecting another actor while the first one is still moving
+
+
+# I M P R O V E M E N T
+#	[] change movement of actors for precise walk
+
+
 # G E N E R A L
 #	USER INTERFACE
 #	[x] hightlight selected tile
 #	[x] draw black board border
-#	[] menu
+#	MENU
 #		[] start normal game
 #		[] start flash mode game
+#		[] hero collection
+#		[] build your team
 #		[] exit game
+
 
 # M O V E M E N T   S Y S T E M
 #	[x] actors can move

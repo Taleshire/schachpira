@@ -1,8 +1,58 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sprites/tile_border.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/tile_flat.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/tile_black.png" type="Texture" id=3]
+
+[sub_resource type="StreamTexture" id=1]
+
+flags = 0
+load_path = "res://.import/tile_fire.png-cb805e6e6e1ac8da86356650f0763769.stex"
+
+[sub_resource type="StreamTexture" id=2]
+
+flags = 0
+load_path = "res://.import/tile_water.png-715045b6ea3e32ab3c16b547b0be672f.stex"
+
+[sub_resource type="StreamTexture" id=3]
+
+flags = 0
+load_path = "res://.import/tile_earth.png-c0d251192ba5b729b39d025e707bec49.stex"
+
+[sub_resource type="StreamTexture" id=4]
+
+flags = 0
+load_path = "res://.import/tile_air.png-0f27bc93a6b3a6bf3142df6c0f0145a8.stex"
+
+[sub_resource type="StreamTexture" id=5]
+
+flags = 0
+load_path = "res://.import/tile_spirit.png-fba066d1300211c15aafe8f279764249.stex"
+
+[sub_resource type="StreamTexture" id=6]
+
+flags = 0
+load_path = "res://.import/tile_decay.png-9bec3d3a0c4cfa97a5ef9b0bdccab64d.stex"
+
+[sub_resource type="StreamTexture" id=7]
+
+flags = 0
+load_path = "res://.import/tile_life.png-9f1438275e886d33af844e17176a7dc7.stex"
+
+[sub_resource type="StreamTexture" id=8]
+
+flags = 0
+load_path = "res://.import/tile_death.png-1d214d81f553f7c196d1e16ea23b19d1.stex"
+
+[sub_resource type="StreamTexture" id=9]
+
+flags = 0
+load_path = "res://.import/tile_order.png-77158c0a3d5ecc100f7bed16213dd033.stex"
+
+[sub_resource type="StreamTexture" id=10]
+
+flags = 0
+load_path = "res://.import/tile_chaos.png-7814755d20915e8d37034aeae44d7291.stex"
 
 [node name="Tileset" type="Node2D"]
 
@@ -20,6 +70,66 @@ _sections_unfolded = [ "Offset" ]
 [node name="Flat2" type="Sprite" parent="."]
 position = Vector2( 128, 0 )
 texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Fire" type="Sprite" parent="."]
+position = Vector2( 0, 64 )
+texture = SubResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Water" type="Sprite" parent="."]
+position = Vector2( 64, 64 )
+texture = SubResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Earth" type="Sprite" parent="."]
+position = Vector2( 128, 64 )
+texture = SubResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Air" type="Sprite" parent="."]
+position = Vector2( 192, 64 )
+texture = SubResource( 4 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Spirit" type="Sprite" parent="."]
+position = Vector2( 256, 64 )
+texture = SubResource( 5 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Decay" type="Sprite" parent="."]
+position = Vector2( 0, 128 )
+texture = SubResource( 6 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Life" type="Sprite" parent="."]
+position = Vector2( 64, 128 )
+texture = SubResource( 7 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Death" type="Sprite" parent="."]
+position = Vector2( 128, 128 )
+texture = SubResource( 8 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Order" type="Sprite" parent="."]
+position = Vector2( 192, 128 )
+texture = SubResource( 9 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Tile Chaos" type="Sprite" parent="."]
+position = Vector2( 256, 128 )
+texture = SubResource( 10 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
