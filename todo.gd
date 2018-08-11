@@ -10,6 +10,8 @@
 #	USER INTERFACE
 #	[x] hightlight selected tile
 #	[x] draw black board border
+#	[] movable camera!
+#	[] items!
 #	MENU
 #		[] start normal game
 #		[] start flash mode game
@@ -76,3 +78,4 @@
 #		[] GREEN'ISH BROWN (death)
 #		[X] SILVER (order)
 #		[] PINK (chaos)
+#
