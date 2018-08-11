@@ -8,14 +8,13 @@ var speed : int = 300
 
 export(int) var HEALTH_MAX = 8
 export(int) var MOVES_MAX = 4
-export(int) var INIT_MAX = 5
 export(int) var STRENGTH_MAX = 2
 export(int) var ATTACK_RANGE = 1
 
 var health : int
 var moves : int
-var init : int
 var strength : int
+var honor : int = 0
 
 var can_move : bool = true
 var can_attack : bool = true
@@ -28,7 +27,6 @@ var path : PoolVector2Array setget set_path
 func _ready():
 	health = HEALTH_MAX
 	moves = MOVES_MAX
-	init = INIT_MAX
 	strength = STRENGTH_MAX
 
 
