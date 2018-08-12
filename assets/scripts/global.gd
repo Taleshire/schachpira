@@ -15,8 +15,10 @@ func _fill_map_dictionary():
 		scene = preload("res://assets/scenes/maps/Map.tscn")}
 
 func _fill_token_dictionary():
-	tokens["standard"] = { 
-		scene = preload("res://assets/scenes/tokens/Token.tscn")}
+	tokens["gold"] = { 
+		scene = preload("res://assets/scenes/tokens/Gold.tscn")}
+	tokens["silver"] = { 
+		scene = preload("res://assets/scenes/tokens/Silver.tscn")}
 
 func new_match(_map_id, _token_ids):
 	map_id = _map_id

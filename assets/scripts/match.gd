@@ -31,11 +31,8 @@ func _input(event):
 			move_handler.move_token_by_cell(active_token, cell)
 		else:
 			_set_active_token(_get_token_at_cell(cell))
-			draw.draw_move_marker(map.get_reachable_cells_t(active_token))
 	if Input.is_action_just_pressed("click_right")  and not is_selection_locked:
 		_set_active_token(null)
-		draw.clear_path_marker()
-		draw.clear_move_marker()
 
 func _process(delta):
 	# DRAW SELECTION
@@ -103,6 +100,10 @@ func _set_active_token(_token):
 	if active_token:
 		map.unblock_cell(_get_active_token_cell())
 		active_token.enlarge()
+		draw.draw_move_marker(map.get_reachable_cells_t(active_token))
+	else:
+		draw.clear_path_marker()
+		draw.clear_move_marker()
 	
 
 func _on_move_path_changed():
