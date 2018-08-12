@@ -1,23 +1,24 @@
 # B U G S
-#	[] fix tile blocking when selecting another actor while the first one is still moving
-
+#	[x] fix tile blocking when selecting another actor while the first one is still moving
+#	[x] fix the fucking difference between local and global tile positions!
 
 # I M P R O V E M E N T
-#	[] change movement of actors for precise walk
+#	[x] change movement of tokens for precise walk
 
 
 # G E N E R A L
 #	USER INTERFACE
 #	[x] hightlight selected tile
 #	[x] draw black board border
-#	[] movable camera!
-#	[] items!
+#	[x] small tiltle screen
+#	[x] write move_handler
+#	[x] movable camera!
 #	MENU
-#		[] start normal game
-#		[] start flash mode game
+#		[x] start normal match
+#		[] start flash mode match
 #		[] hero collection
 #		[] build your team
-#		[] exit game
+#		[x] exit game
 
 
 # M O V E M E N T   S Y S T E M
@@ -33,19 +34,19 @@
 
 
 # T U R N   S Y S T E M
-#	[x] add a "turn end" button
-#		[x] reset moves 
-#		[x] earn honor
+#	[] add a "turn end" button
+#		[] reset moves 
+#		[] earn honor
 #		- health / mira regeneration? 
 
 
 # C O M B A T   S Y S T E M
-#	ACTORS
+#	TOKENS
 #		[] recognize allies and foes
 #		[] switch between move and attack mode with "space"
-#		[] actors can attack foes
-#		[] draw / highlight reachable tiles
-#		[] give actors a type
+#		[] tokens can attack foes
+#		[] draw / highlight attackable tiles
+#		[] give tokens a type
 #		[] higher defense at favourable positions
 #		[] lower defense at non contrary positions
 
@@ -57,16 +58,16 @@
 # G R A P H I C S
 #	TILES
 #		[x] BORDER
-#		[] LIGHT BROWN (earth)
-#		[] BLUE (water)
-#		[] RED (fire)
+#		[x] LIGHT BROWN (earth)
+#		[x] BLUE (water)
+#		[x] RED (fire)
 #		[X] ALMOST WHITE (air)
-#		[] GOLD (spirit)
-#		[] DARK BLUE (decay)
-#		[] GREEN (life)
+#		[x] GOLD (spirit)
+#		[x] DARK BLUE (decay)
+#		[x] GREEN (life)
 #		[x] DARK BROWN (death)
-#		[] SILVER (order)
-#		[] GREEN'ISH VIOLET (chaos)
+#		[x] SILVER (order)
+#		[x] GREEN'ISH VIOLET (chaos)
 #	STONES
 #		[] LIGHT BROWN (earth)
 #		[] BLUE (water)

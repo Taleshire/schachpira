@@ -13,13 +13,17 @@ _global_script_classes=[  ]
 [application]
 
 config/name="Schachpira"
-run/main_scene="res://assets/scenes/Level.tscn"
+run/main_scene="res://assets/scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+global="*res://assets/scripts/global.gd"
 
 [display]
 
-window/size/width=832
-window/size/height=576
+window/size/width=1280
+window/size/height=720
 window/size/resizable=false
 
 [input]
@@ -114,4 +118,5 @@ click_right={
 quality/intended_usage/framebuffer_allocation=0
 quality/2d/use_pixel_snap=true
 quality/filters/anisotropic_filter_level=16
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"

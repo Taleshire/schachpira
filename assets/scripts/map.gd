@@ -1,152 +1,154 @@
 extends TileMap
 
-export(int) var width = 13
-export(int) var height = 9
+export(int) var WIDTH : int = 15
+export(int) var HEIGHT : int = 17
+export(Vector2) var CAMERA : Vector2 = Vector2(0, 0)
 
-var astar = AStar.new()
+var offset = Vector2(cell_size.x / 2, cell_size.y / 2)
 
-var obstacles : Array
-var tiles : Dictionary
+var tiles : Dictionary 
+var grid : AStar = AStar.new()
 
-
-func _ready():
-	generate_tiles()
-	block_border_tiles()
-	generate_tile_connections()
+onready var start_positions = get_children()
 
 
-#
-# P U B L I C   M E T H O D S
-#
+# V I R T U A L   F U N C T I O N S
 
+func _init():
+	_generate_tiles()
+	_generate_points()
+	_generate_point_connections()
 
-func find_path(source_map_position : Vector2, destination_map_position : Vector2) -> Array:
-	var path3D = astar.get_point_path(flatten(source_map_position), flatten(destination_map_position))
+# P U B L I C   F U N C T I O N S
+
+func find_path_by_position(_start_position : Vector2, _end_position : Vector2) -> Array:
+	var start_cell = world_to_map(_start_position)
+	var end_cell = world_to_map(_end_position)
+	return find_path_by_cell(start_cell, end_cell)
+
+func find_path_by_cell(_start_cell : Vector2, _end_cell : Vector2) -> Array:
+	var path3D = grid.get_point_path(_flatten_v(_start_cell), _flatten_v(_end_cell))
 	var path2D = []
 	for point in path3D:
 		path2D.append(Vector2(point.x, point.y))
 	return path2D
 
-
-func get_reachable_tiles(source_map_position : Vector2, distance : int):
-	var reachable = []
-	for y in range(height):
-		for x in range(width):
-			var current_map_position = Vector2(x, y)
-			
-			if map_to_world_fixed(current_map_position) == position:
-				continue
-			
-			var difference = current_map_position - source_map_position
-			if abs(difference.x) + abs(difference.y) > distance:
-				continue
-			
-			if is_tile_blocked(flatten(current_map_position)):
-				continue
-			
-			var path = find_path(source_map_position, current_map_position)
-			if path.size() < 1 || path.size() > distance + 1:
-				continue
-			
-			reachable.append(current_map_position)
-	print("Reachable: ", reachable)
+func get_reachable_cells_t(_token : Sprite) -> Array:
+	var reachable = get_reachable_cells(world_to_map(_token.position), _token.actions)
 	return reachable
 
+func get_reachable_cells(_start_cell: Vector2, _range : int) -> Array:
+	var reachable = []
+	for cell in get_used_cells():
+		var path = find_path_by_cell(_start_cell, cell)
+		if path.size() < 2 or path.size() > _range:
+			continue
+		reachable.append(cell)
+	return reachable
 
-func block_tile(var id : int) -> void:
-	tiles[id].is_blocked = true
-	disconnect_with_neighbour_at(id, Vector2( 1,  0))
-	disconnect_with_neighbour_at(id, Vector2(-1,  0))
-	disconnect_with_neighbour_at(id, Vector2( 0,  1))
-	disconnect_with_neighbour_at(id, Vector2( 0, -1))
-	print("blocked tile ", id)
+func unblock_cell(_cell : Vector2) -> void:
+	_connect_with_cardinal_neighbors(_cell)
 
-func unblock_tile(var id : int) -> void:
-	tiles[id].is_blocked = false
-	connect_with_neighbour_at(id, Vector2( 1,  0))
-	connect_with_neighbour_at(id, Vector2(-1,  0))
-	connect_with_neighbour_at(id, Vector2( 0,  1))
-	connect_with_neighbour_at(id, Vector2( 0, -1))
-	print("unblocked tile ", id)
+func block_cell(_cell : Vector2) -> void:
+	_disconnect_with_cardinal_neighbors(_cell)
 
-func is_tile_blocked(var id : int) -> bool:
-	return tiles[id].is_blocked
+func get_mouse_cell() -> Vector2:
+	var mouse_position = get_local_mouse_position()
+	return world_to_map(mouse_position)
 
+func get_mouse_position() -> Vector2:
+	return get_local_mouse_position()
 
-func map_to_world_fixed(map_position : Vector2) -> Vector2:
-	return map_to_world(map_position) + Vector2(cell_size.x / 2, cell_size.y / 2)
+func get_cell_difference(_cell) -> Vector2:
+	return get_mouse_cell() - _cell
 
-func world_to_world(world_position : Vector2) -> Vector2:
-	return map_to_world(world_to_map(world_position))
+func world_to_world_centered(_position : Vector2) -> Vector2:
+	return world_to_world(_position) + offset
 
-func world_to_world_fixed(world_position : Vector2) -> Vector2:
-	return map_to_world(world_to_map(world_position)) + Vector2(cell_size.x / 2, cell_size.y / 2)
+func world_to_world(_position : Vector2) -> Vector2:
+	return map_to_world(world_to_map(_position))
 
+func map_to_world_centered(_cell : Vector2) -> Vector2:
+	return map_to_world(_cell) + offset
 
-#
-# I N T E R N A L   M E T H O D S
-#
+func get_camera_start_position() -> Vector2:
+	return map_to_world_centered(CAMERA)
 
+# P R I V A T E   F U N C T I O N S
 
-func generate_tiles() -> void:
-	for y in range(height):
-		for x in range(width):
-			var id : int = flatten(Vector2(x, y))
-			astar.add_point(id, Vector3(x, y, 0))
-			tiles[id] = {
-				type = get_cell(x, y),
-				map_position = Vector2(x, y),
-				world_position = map_to_world(Vector2(x, y)),
-				cost = 1,
+func _generate_tiles() -> void:
+	for cell in get_used_cells():
+		var id = _flatten_v(cell)
+		tiles[id] = {
+				cell = cell,
+				weight = 1,
 				is_blocked = false,
 			}
+	_block_border_tiles()
 
-func generate_tile_connections() -> void:
-	for y in range(height):
-		for x in range(width):
-			var id : int =  flatten(Vector2(x, y))
-			var id_position = astar.get_point_position(id)
-			var neighbors = {
-				u = id_position + Vector3(0, -1, 0),
-				d = id_position + Vector3(0,  1, 0),
-				r = id_position + Vector3( 1, 0, 0),
-				l = id_position + Vector3(-1, 0, 0),
-				#ur = id_position + Vector3(1, -1, 0),
-				#ul = id_position + Vector3(-1,  -1, 0),
-				#dr = id_position + Vector3( 1, 1, 0),
-				#dl = id_position + Vector3(-1, 1, 0)
-			}
-			for n in neighbors.values():
-				if check_boundaries(n) && !astar.are_points_connected(id, flatten(Vector2(n.x, n.y))):
-					#print("connected ", id, " and ", flatten(n.x, n.y))
-					if !tiles[id].is_blocked and !tiles[flatten(Vector2(n.x, n.y))].is_blocked:
-						astar.connect_points(id, flatten(Vector2(n.x, n.y)))
-
-
-func block_border_tiles():
-	for id in range(width * height):
-		if tiles[id].type == 0:
+func _block_border_tiles():
+	for cell in get_used_cells():
+		var id = _flatten_v(cell)
+		if get_cell(cell.x, cell.y) == 0:
 			tiles[id].is_blocked = true
 
-func flatten(map_position : Vector2) -> int:
-	return int(map_position.y) * width + int(map_position.x);
+func _generate_points() -> void:
+	for cell in get_used_cells():
+		var id = _flatten_v(cell)
+		grid.add_point(id, Vector3(cell.x, cell.y, 0))
+
+func _generate_point_connections() -> void:
+	for cell in get_used_cells():
+		var id = _flatten_v(cell)
+		var point = grid.get_point_position(id)
+		_connect_with_cardinal_neighbors(cell)
+
+func _connect_with_cardinal_neighbors(_cell : Vector2) -> void:
+	var id = _flatten_v(_cell)
+	var neighbors = _get_cardinal_neighbors(_cell)
+	for n in neighbors:
+		var n_id = _flatten(n.x, n.y)
+		if _check_boundaries(n) and !grid.are_points_connected(id, n_id):
+			if !tiles[id].is_blocked and !tiles[n_id].is_blocked:
+				grid.connect_points(id, n_id)
+
+func _disconnect_with_cardinal_neighbors(_cell : Vector2) -> void:
+	var id = _flatten_v(_cell)
+	var neighbors = _get_cardinal_neighbors(_cell)
+	for n in neighbors:
+		var n_id = _flatten(n.x, n.y)
+		if _check_boundaries(n) and grid.are_points_connected(id, n_id):
+			grid.disconnect_points(id, n_id)
 
 
-func check_boundaries(point : Vector3) -> bool:
-	return (point.x >= 0 && point.y >= 0 && point.x < width  && point.y < height)
+func _get_all_neighbors(_cell : Vector2) -> Array:
+	var cardinal : Array = _get_cardinal_neighbors(_cell)
+	var diagonal : Array = _get_diagonal_neighbors(_cell)
+	return cardinal + diagonal
 
+func _get_cardinal_neighbors(_cell : Vector2) -> Array:
+	var cube = Vector3(_cell.x, _cell.y, 0)
+	var neighbors : Array = []
+	neighbors.append(cube + Vector3(0, -1, 0))
+	neighbors.append(cube + Vector3(0,  1, 0))
+	neighbors.append(cube + Vector3( 1, 0, 0))
+	neighbors.append(cube + Vector3(-1, 0, 0))
+	return neighbors
 
-func connect_with_neighbour_at(id : int, offset : Vector2) -> void:
-	var cpos = astar.get_point_position(id)
-	var p = cpos + Vector3(offset.x, offset.y, 0)
-	if check_boundaries(p) && !astar.are_points_connected( id, flatten(Vector2(p.x, p.y)) ):
-		if !tiles[id].is_blocked and !tiles[flatten(Vector2(p.x, p.y))].is_blocked:
-			astar.connect_points(id, flatten(Vector2(p.x, p.y)))
+func _get_diagonal_neighbors(_cell : Vector2) -> Array:
+	var cube = Vector3(_cell.x, _cell.y, 0)
+	var neighbors : Array = []
+	neighbors.append(cube + Vector3(1, -1, 0))
+	neighbors.append(cube + Vector3(-1,  -1, 0))
+	neighbors.append(cube + Vector3( 1, 1, 0))
+	neighbors.append(cube + Vector3(-1, 1, 0))
+	return neighbors
 
-func disconnect_with_neighbour_at(id : int, offset : Vector2) -> void:
-	var cpos = astar.get_point_position(id)
-	var p = cpos + Vector3(offset.x, offset.y, 0)
-	if check_boundaries(p) && astar.are_points_connected( id, flatten(Vector2(p.x, p.y)) ):
-		astar.disconnect_points(id, flatten(Vector2(p.x, p.y)))
+func _flatten_v(_cell: Vector2) -> int:
+	return int(_cell.y) * WIDTH + int(_cell.x)
 
-
+func _flatten(_x : int, _y : int) -> int:
+	return _y * WIDTH + _x
+	
+func _check_boundaries(_point : Vector3) -> bool:
+	return (_point.x >= 0 and _point.y >= 0 and _point.x < WIDTH  and _point.y < HEIGHT)

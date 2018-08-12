@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/scripts/menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/ui/Logo.png" type="Texture" id=2]
+[ext_resource path="res://assets/scenes/utils/MenuButton.tscn" type="PackedScene" id=3]
+
+[node name="Main" type="Control"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 1160.0
+margin_bottom = 640.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Margin" ]
+
+[node name="Logo" type="TextureRect" parent="Menu"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1040.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+stretch_mode = 4
+_sections_unfolded = [ "Rect" ]
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 204.0
+margin_right = 1040.0
+margin_bottom = 560.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1040.0
+margin_bottom = 356.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_constants/separation = 10
+alignment = 0
+_sections_unfolded = [ "Custom Constants", "Size Flags" ]
+
+[node name="NewMatch" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1040.0
+margin_bottom = 50.0
+
+[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+editor/display_folded = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 60.0
+margin_right = 1040.0
+margin_bottom = 110.0
+
+[node name="Label" parent="Menu/CenterRow/Buttons/Exit" index="0"]
+text = "Exit
+"
+_sections_unfolded = [ "Custom Colors", "Custom Constants", "Custom Fonts", "custom_fonts/font" ]
+
+[connection signal="pressed" from="Menu/CenterRow/Buttons/NewMatch" to="Menu" method="_on_new_match_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/Exit" to="Menu" method="_on_exit_pressed"]
+
+[editable path="Menu/CenterRow/Buttons/Exit"]
