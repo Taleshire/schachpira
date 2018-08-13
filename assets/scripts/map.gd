@@ -77,6 +77,9 @@ func map_to_world_centered(_cell : Vector2) -> Vector2:
 func get_camera_start_position() -> Vector2:
 	return map_to_world_centered(CAMERA)
 
+func get_side_count()-> int:
+	return SIDES
+
 func get_start_positions(_side: int) -> Array:
 	var positions : Array = []
 	for p in start_positions:

@@ -1,8 +1,5 @@
 extends Node2D
 
-const BASE_LINE_WIDTH = 3.0
-const DRAW_COLOR = Color('#fff')
-
 var mark_gold = preload("res://assets/sprites/ui/mark_gold.png")
 var mark_blue = preload("res://assets/sprites/ui/mark_blue.png")
 var mark_green = preload("res://assets/sprites/ui/mark_green.png")

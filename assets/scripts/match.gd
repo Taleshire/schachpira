@@ -3,15 +3,12 @@ extends Node2D
 var map
 var tokens
 
-var turn
-
 var active_side setget _set_active_side
-
 var active_token setget _set_active_token
 var active_token_path : Array = []
 
-
 var is_selection_locked : bool
+
 
 onready var move_handler = $Handler/Move
 
@@ -77,7 +74,6 @@ func get_reachable_cells(_token : Sprite) -> Array:
 # P R I V A T E   F U N C T I O N S
 
 func _load_tokens():
-	var positions = map.start_positions
 	for t in global.token_ids:
 		var p = map.get_next_start_position(t[0])
 		if !p:
