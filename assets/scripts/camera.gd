@@ -1,7 +1,7 @@
 extends Camera2D
 
 const SPEED = 1000
-const BORDER = 64
+const BORDER = 10
 
 var up
 var down

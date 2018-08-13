@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/scripts/match.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/move_handler.gd" type="Script" id=2]
 [ext_resource path="res://assets/scenes/utils/Draw.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/scripts/camera.gd" type="Script" id=4]
+[ext_resource path="res://assets/fonts/Roboto.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/scripts/camera.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 18
+outline_size = 0
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Match" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,7 +44,45 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Display" type="Node2D" parent="UI"]
+[node name="HUD" type="Control" parent="UI"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="TurnEnd" type="Button" parent="UI/HUD"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1160.0
+margin_top = 670.0
+margin_right = 1260.0
+margin_bottom = 704.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "End Turn"
+flat = false
+align = 1
+_sections_unfolded = [ "Custom Fonts", "Rect", "custom_fonts/font" ]
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 1
@@ -58,8 +107,9 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [connection signal="path_changed" from="Handler/Move" to="." method="_on_move_path_changed"]
 [connection signal="token_arrived" from="Handler/Move" to="." method="_on_move_token_arrived"]
 [connection signal="token_started" from="Handler/Move" to="." method="_on_move_token_started"]
+[connection signal="pressed" from="UI/HUD/TurnEnd" to="." method="_on_turn_end_pressed"]

@@ -1,5 +1,6 @@
 extends TileMap
 
+export(int) var SIDES : int = 2 
 export(int) var WIDTH : int = 15
 export(int) var HEIGHT : int = 17
 export(Vector2) var CAMERA : Vector2 = Vector2(0, 0)
@@ -31,6 +32,8 @@ func find_path_by_cell(_start_cell : Vector2, _end_cell : Vector2) -> Array:
 	var path2D = []
 	for point in path3D:
 		path2D.append(Vector2(point.x, point.y))
+	if !path2D.empty():
+			path2D.remove(0)
 	return path2D
 
 func get_reachable_cells_t(_token : Sprite) -> Array:
@@ -41,7 +44,7 @@ func get_reachable_cells(_start_cell: Vector2, _range : int) -> Array:
 	var reachable = []
 	for cell in get_used_cells():
 		var path = find_path_by_cell(_start_cell, cell)
-		if path.size() < 2 or path.size() > _range:
+		if path.size() == 0 or path.size() > _range:
 			continue
 		reachable.append(cell)
 	return reachable
@@ -163,5 +166,5 @@ func _flatten_v(_cell: Vector2) -> int:
 func _flatten(_x : int, _y : int) -> int:
 	return _y * WIDTH + _x
 	
-func _check_boundaries(_point : Vector3) -> bool:
+func _check_boundaries(_point) -> bool:
 	return (_point.x >= 0 and _point.y >= 0 and _point.x < WIDTH  and _point.y < HEIGHT)

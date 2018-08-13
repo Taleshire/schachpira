@@ -22,7 +22,7 @@ func _process(delta):
 	if path.size() != 0 and token:
 		var direction = _get_move_direction()
 		var velocity = direction * SPEED * delta
-		print(velocity)
+		#print(velocity)
 		token.position += velocity.floor()
 		if token.position * direction > map.map_to_world_centered(path[0]) * direction:
 			emit_signal("path_changed")
@@ -43,10 +43,9 @@ func move_token_to_cell(_token : Sprite, _end_cell : Vector2 ):
 func move_token(_token : Sprite, _path : Array):
 	path = _path
 	print(path)
-	if path.size() > 1:
+	if path.size() > 0:
 		token = _token
-		last_point = path[0]
-		path.remove(0)
+		last_point = match_._get_active_token_cell()
 		emit_signal("token_started")
 
 # P R I V A T E   F U N C T I O N S

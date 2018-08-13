@@ -1,13 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/sprites/stones/stone_gold.png" type="Texture" id=1]
-[ext_resource path="res://assets/scripts/token.gd" type="Script" id=2]
+[ext_resource path="res://assets/scenes/tokens/Token.tscn" type="PackedScene" id=1]
 
-[node name="Gold" type="Sprite"]
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 1 )
-script = ExtResource( 2 )
-_sections_unfolded = [ "Offset", "Script", "Transform", "texture" ]
-ACTIONS_MAX = 8
-SIDE = 1
+[node name="Silver" instance=ExtResource( 1 )]
 
