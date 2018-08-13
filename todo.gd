@@ -24,22 +24,21 @@
 
 
 # M O V E M E N T   S Y S T E M
-#	[x] actors can move
-#	[x] actors can only move as much as they have moves
+#	[x] tokens can move
+#	[x] tokens can only move as much as they have moves
 #	[x] recognize blocked tiles
 #	[x] draw / highlight reachable tiles
 #	[x] draw preview for path
-#	[] make path editable
-#		[] one click sets a checkpoint
-#		[] another click on the same tile moves the actor
-#		[] another click on another tile sets another checkpoint 
+#	[x] make path editable
+#		[x] one click sets a checkpoint
+#		[x] another click on the same tile moves the actor
+#		[x] another click on another tile sets another checkpoint 
 
 
 # T U R N   S Y S T E M
 #	[] add a "turn end" button
-#		[] reset moves 
+#		[] reset actions
 #		[] earn honor
-#		- health / mira regeneration? 
 
 
 # C O M B A T   S Y S T E M

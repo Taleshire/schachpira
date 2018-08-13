@@ -26,13 +26,16 @@ func _ready():
 func draw_selection() -> void:
 	marker_gold.position = match_.map.world_to_world(get_global_mouse_position())
 
-func draw_path(_path : Array) -> void:
+func draw_path(_path : Array, _range : int = 50) -> void:
+	var counter : int = 1
 	_remove_all_marker($PathContainer)
 	if !_path.empty():
-		_path.remove(0)
 		for point in _path:
 			var point_position = match_.map.map_to_world_centered(point)
 			_add_marker($PathContainer, mark_blue, point_position, Vector2(0.7, 0.7))
+			counter += 1
+			if counter > _range:
+				return
 
 
 func draw_move_marker(_reachable_cells : Array) -> void:

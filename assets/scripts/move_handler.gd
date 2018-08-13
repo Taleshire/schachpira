@@ -36,16 +36,18 @@ func _process(delta):
 
 # P U B L I C   F U N C T I O N S
 
-func move_token_by_cell(_token : Sprite, _end_cell : Vector2 ):
+func move_token_to_cell(_token : Sprite, _end_cell : Vector2 ):
 	var start_cell = map.world_to_map(_token.position)
-	path = map.find_path_by_cell(start_cell, _end_cell)
+	move_token(_token, map.find_path_by_cell(start_cell, _end_cell))
+
+func move_token(_token : Sprite, _path : Array):
+	path = _path
 	print(path)
 	if path.size() > 1:
 		token = _token
-		last_point = start_cell
+		last_point = path[0]
 		path.remove(0)
 		emit_signal("token_started")
-	pass
 
 # P R I V A T E   F U N C T I O N S
 
