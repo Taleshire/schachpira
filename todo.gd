@@ -8,7 +8,7 @@
 #	[x] change movement of tokens for precise walk
 #	[x] smooth camera movement
 #	[x] scroll camera with mouse on edges
-
+#	[x] optimize find path | draw path methods to be faster
 
 # G E N E R A L
 #	USER INTERFACE

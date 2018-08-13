@@ -70,11 +70,6 @@ func _input(event):
 func _process(delta):
 	if !is_in_menu:
 		draw.draw_selection()
-		if active_token and not is_selection_locked:
-			if map._check_boundaries(map.get_mouse_cell()) and active_token.has_actions_left():
-				var additional_path = map.find_path_by_cell(_get_last_path_point(), map.get_mouse_cell())
-				var draw_path = active_token_path + additional_path
-				draw.draw_path(draw_path, active_token.actions)
 
 # P U B L I C   F U N C T I O N S
 
@@ -235,3 +230,11 @@ func _on_resume_pressed():
 	menu.visible = !menu.visible
 	is_in_menu = menu.visible
 	camera.is_in_menu = menu.visible
+
+
+func _on_selection_position_changed():
+	if active_token and not is_selection_locked:
+		if map._check_boundaries(map.get_mouse_cell()) and active_token.has_actions_left():
+			var additional_path = map.find_path_by_cell(_get_last_path_point(), map.get_mouse_cell())
+			var draw_path = active_token_path + additional_path
+			draw.draw_path(draw_path, active_token.actions)

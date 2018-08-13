@@ -42,8 +42,9 @@ func get_reachable_cells_t(_token : Sprite) -> Array:
 func get_reachable_cells(_start_cell: Vector2, _range : int) -> Array:
 	var reachable = []
 	for cell in get_used_cells():
-		var path = find_path_by_cell(_start_cell, cell)
-		if path.size() == 0 or path.size() > _range:
+		var diff_x = abs(_start_cell.x - cell.x)
+		var diff_y = abs(_start_cell.y - cell.y)
+		if diff_x + diff_y > _range or tiles[_flatten_v(cell)].is_blocked:
 			continue
 		reachable.append(cell)
 	return reachable

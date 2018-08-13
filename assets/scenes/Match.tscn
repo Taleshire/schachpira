@@ -35,6 +35,7 @@ script = ExtResource( 2 )
 [node name="Fight" type="Node" parent="Handler"]
 
 [node name="Draw" parent="." instance=ExtResource( 3 )]
+editor/display_folded = true
 z_index = 5
 _sections_unfolded = [ "Script", "Transform", "Z Index" ]
 
@@ -189,9 +190,12 @@ script = ExtResource( 6 )
 [connection signal="path_changed" from="Handler/Move" to="." method="_on_move_path_changed"]
 [connection signal="token_arrived" from="Handler/Move" to="." method="_on_move_token_arrived"]
 [connection signal="token_started" from="Handler/Move" to="." method="_on_move_token_started"]
+[connection signal="position_changed" from="Draw/Selection" to="." method="_on_selection_position_changed"]
 [connection signal="pressed" from="UI/HUD/TurnEnd" to="." method="_on_turn_end_pressed"]
 [connection signal="pressed" from="UI/Menu/CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/Menu/CenterContainer/VBoxContainer/QuitMatch" to="." method="_on_quit_match_pressed"]
+
+[editable path="Draw"]
 
 [editable path="UI/Menu/CenterContainer/VBoxContainer/Resume"]
 

@@ -6,17 +6,10 @@ var mark_green = preload("res://assets/sprites/ui/mark_green.png")
 var Marker = preload("res://assets/scenes/utils/Marker.tscn")
 
 var match_
-var marker_gold
+
+onready var marker_gold = $Selection
 
 # V I R T U A L   F U N C T I O N S
-
-func _ready():
-	marker_gold = Marker.instance()
-	marker_gold.texture = mark_gold
-	marker_gold.centered = false
-	add_child(marker_gold)
-	print("DRAW READY!")
-	pass
 
 # P U B L I C   F U N C T I O N S
 
