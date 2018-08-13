@@ -1,7 +1,7 @@
 extends Camera2D
 
 const SPEED = 1000
-const BORDER = 100
+const BORDER = 64
 
 func _process(delta):
 	var width = get_viewport_rect().size.x / 2 - BORDER
