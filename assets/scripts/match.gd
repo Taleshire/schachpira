@@ -175,4 +175,6 @@ func _on_move_token_arrived():
 	_set_active_token(null)
 
 func _on_move_token_started():
+	draw.clear_path_marker()
+	draw.clear_move_marker()
 	is_selection_locked = true

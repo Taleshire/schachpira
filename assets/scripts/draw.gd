@@ -5,7 +5,7 @@ const DRAW_COLOR = Color('#fff')
 
 var mark_gold = preload("res://assets/sprites/ui/mark_gold.png")
 var mark_blue = preload("res://assets/sprites/ui/mark_blue.png")
-
+var mark_green = preload("res://assets/sprites/ui/mark_green.png")
 var Marker = preload("res://assets/scenes/utils/Marker.tscn")
 
 var match_
@@ -32,7 +32,7 @@ func draw_path(_path : Array, _range : int = 50) -> void:
 	if !_path.empty():
 		for point in _path:
 			var point_position = match_.map.map_to_world_centered(point)
-			_add_marker($PathContainer, mark_blue, point_position, Vector2(0.7, 0.7))
+			_add_marker($PathContainer, mark_green, point_position, Vector2(0.7, 0.7))
 			counter += 1
 			if counter > _range:
 				return

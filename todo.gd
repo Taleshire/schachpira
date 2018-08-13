@@ -1,6 +1,8 @@
 # B U G S
 #	[x] fix tile blocking when selecting another actor while the first one is still moving
 #	[x] fix the fucking difference between local and global tile positions!
+#	[] fix drawn paths
+
 
 # I M P R O V E M E N T
 #	[x] change movement of tokens for precise walk
