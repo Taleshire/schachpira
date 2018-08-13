@@ -1,7 +1,7 @@
 # B U G S
 #	[x] fix tile blocking when selecting another actor while the first one is still moving
 #	[x] fix the fucking difference between local and global tile positions!
-#	[] fix drawn paths
+#	[x] fix drawn paths
 
 
 # I M P R O V E M E N T
@@ -38,14 +38,15 @@
 
 
 # T U R N   S Y S T E M
-#	[] add a "turn end" button
-#		[] reset actions
-#		[] earn honor
+#	[x] add a "turn end" button
+#	[x] recognize which side's turn it is 
+#	[x] reset actions
+#	[] earn honor
 
 
 # C O M B A T   S Y S T E M
 #	TOKENS
-#		[] recognize allies and foes
+#		[x] recognize allies and foes
 #		[] switch between move and attack mode with "space"
 #		[] tokens can attack foes
 #		[] draw / highlight attackable tiles
