@@ -12,10 +12,9 @@ var grid : AStar = AStar.new()
 
 onready var start_positions = get_children()
 
-
 # V I R T U A L   F U N C T I O N S
 
-func _init():
+func _ready():
 	_generate_tiles()
 	_generate_points()
 	_generate_point_connections()
@@ -96,31 +95,39 @@ func get_next_start_position(_side : int) -> Position2D:
 # P R I V A T E   F U N C T I O N S
 
 func _generate_tiles() -> void:
-	for cell in get_used_cells():
-		var id = _flatten_v(cell)
-		tiles[id] = {
-				cell = cell,
-				weight = 1,
-				is_blocked = false,
-			}
+	for y in range(HEIGHT):
+		for x in range(WIDTH):
+			var cell = Vector2(x, y)
+			var id = _flatten_v(cell)
+			tiles[id] = {
+					cell = cell,
+					weight = 1,
+					is_blocked = false,
+				}
 	_block_border_tiles()
 
 func _block_border_tiles():
-	for cell in get_used_cells():
-		var id = _flatten_v(cell)
-		if get_cell(cell.x, cell.y) == 0:
-			tiles[id].is_blocked = true
+	for y in range(HEIGHT):
+		for x in range(WIDTH):
+			var cell = Vector2(x, y)
+			var id = _flatten_v(cell)
+			if get_cell(cell.x, cell.y) == 0:
+				tiles[id].is_blocked = true
 
 func _generate_points() -> void:
-	for cell in get_used_cells():
-		var id = _flatten_v(cell)
-		grid.add_point(id, Vector3(cell.x, cell.y, 0))
+	for y in range(HEIGHT):
+		for x in range(WIDTH):
+			var cell = Vector2(x, y)
+			var id = _flatten_v(cell)
+			grid.add_point(id, Vector3(cell.x, cell.y, 0))
 
 func _generate_point_connections() -> void:
-	for cell in get_used_cells():
-		var id = _flatten_v(cell)
-		var point = grid.get_point_position(id)
-		_connect_with_cardinal_neighbors(cell)
+	for y in range(HEIGHT):
+		for x in range(WIDTH):
+			var cell = Vector2(x, y)
+			var id = _flatten_v(cell)
+			var point = grid.get_point_position(id)
+			_connect_with_cardinal_neighbors(cell)
 
 func _connect_with_cardinal_neighbors(_cell : Vector2) -> void:
 	var id = _flatten_v(_cell)

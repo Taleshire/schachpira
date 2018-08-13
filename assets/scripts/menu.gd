@@ -1,9 +1,10 @@
 extends VBoxContainer
 
-func _on_new_match_pressed():
-	# CHOOS MAP
-	var map = "standard"
-	
+func _on_exit_pressed():
+	get_tree().quit()
+
+func _on_2_player_match_pressed():
+	var map = "standard_2"
 	var tokens = [
 		[1, "gold"],
 		[1, "gold"],
@@ -13,9 +14,27 @@ func _on_new_match_pressed():
 		[2, "silver"],
 		[2, "silver"],
 	]
-	
-	# LOAD MATCH
 	global.new_match(map, tokens)
 
-func _on_exit_pressed():
-	get_tree().quit()
+
+func _on_4_player_match_pressed():
+	var map = "standard_4"
+	var tokens = [
+		[1, "gold"],
+		[1, "silver"],
+		[1, "gold"],
+		[1, "gold"],
+		[2, "silver"],
+		[2, "gold"],
+		[2, "silver"],
+		[2, "gold"],
+		[3, "silver"],
+		[3, "gold"],
+		[3, "silver"],
+		[3, "silver"],
+		[4, "silver"],
+		[4, "silver"],
+		[4, "silver"],
+		[4, "silver"],
+	]
+	global.new_match(map, tokens)

@@ -17,8 +17,14 @@
 #	[x] small tiltle screen
 #	[x] write move_handler
 #	[x] movable camera!
-#	MENU
-#		[x] start normal match
+#	[x] Second Map with 4 Players
+#	INGAME MENU
+#		[x] freeze background input
+#		[x] "Resume" should resume to game
+#		[x] "Quit Match" should return to title screen
+#	TILE SCREEN
+#		[x] 2 Player Match
+#		[x] 4 Player Match
 #		[] start flash mode match
 #		[] hero collection
 #		[] build your team

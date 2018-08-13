@@ -8,12 +8,14 @@ var active_token setget _set_active_token
 var active_token_path : Array = []
 
 var is_selection_locked : bool
-
+var is_in_menu : bool = false
 
 onready var move_handler = $Handler/Move
 
 onready var map_container = $MapContainer
 onready var token_container = $TokenContainer
+
+onready var menu = $UI/Menu
 
 onready var draw = $Draw
 onready var camera = $Camera
@@ -30,12 +32,20 @@ func _ready():
 	
 var click_left
 var click_right
+var escape
 
 func _input(event):
-	var click_left = Input.is_action_just_pressed("click_left")
-	var click_right = Input.is_action_just_pressed("click_right")
+	click_left = Input.is_action_just_pressed("click_left")
+	click_right = Input.is_action_just_pressed("click_right")
+	escape = Input.is_action_just_pressed("escape")
+	
+	if escape:
+		menu.visible = !menu.visible
+		is_in_menu = menu.visible
+		camera.is_in_menu = menu.visible
+	
 	if event is InputEventMouseButton:
-		if click_left and not is_selection_locked:
+		if click_left and not is_selection_locked and !is_in_menu:
 			var mouse_cell = map.get_mouse_cell()
 			print(mouse_cell)
 			if active_token and !_is_token_at_cell(mouse_cell):
@@ -58,12 +68,13 @@ func _input(event):
 			_set_active_token(null)
 
 func _process(delta):
-	draw.draw_selection()
-	if active_token and not is_selection_locked:
-		if map._check_boundaries(map.get_mouse_cell()) and active_token.has_actions_left():
-			var additional_path = map.find_path_by_cell(_get_last_path_point(), map.get_mouse_cell())
-			var draw_path = active_token_path + additional_path
-			draw.draw_path(draw_path, active_token.actions)
+	if !is_in_menu:
+		draw.draw_selection()
+		if active_token and not is_selection_locked:
+			if map._check_boundaries(map.get_mouse_cell()) and active_token.has_actions_left():
+				var additional_path = map.find_path_by_cell(_get_last_path_point(), map.get_mouse_cell())
+				var draw_path = active_token_path + additional_path
+				draw.draw_path(draw_path, active_token.actions)
 
 # P U B L I C   F U N C T I O N S
 
@@ -139,6 +150,8 @@ func _get_last_path_point() -> Vector2:
 
 func _add_to_active_token_path(_path : Array):
 	var path_size = active_token_path.size() + _path.size()
+	if path_size == 0:
+		return
 	if active_token.actions < path_size:
 		return
 	var actions = active_token.actions - path_size
@@ -214,3 +227,11 @@ func _on_turn_end_pressed():
 	if active_side > map.SIDES:
 		_set_active_side(1)
 	print("Turn Side ", active_side)
+
+func _on_quit_match_pressed():
+	get_tree().change_scene("res://assets/scenes/Main.tscn")
+
+func _on_resume_pressed():
+	menu.visible = !menu.visible
+	is_in_menu = menu.visible
+	camera.is_in_menu = menu.visible

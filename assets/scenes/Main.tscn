@@ -82,7 +82,7 @@ size_flags_vertical = 1
 custom_constants/separation = 10
 alignment = 0
 
-[node name="NewMatch" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+[node name="2PlayerMatch" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1040.0
@@ -91,8 +91,10 @@ focus_mode = -2
 action_mode = -1
 enabled_focus_mode = -2
 
-[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
-editor/display_folded = true
+[node name="Label" parent="Menu/CenterRow/Buttons/2PlayerMatch" index="0"]
+text = "2 Player Match"
+
+[node name="4PlayerMatch" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 60.0
@@ -102,11 +104,30 @@ focus_mode = -2
 action_mode = -1
 enabled_focus_mode = -2
 
+[node name="Label" parent="Menu/CenterRow/Buttons/4PlayerMatch" index="0"]
+text = "4 Player Match"
+
+[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+editor/display_folded = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 120.0
+margin_right = 1040.0
+margin_bottom = 170.0
+focus_mode = -2
+action_mode = -1
+enabled_focus_mode = -2
+
 [node name="Label" parent="Menu/CenterRow/Buttons/Exit" index="0"]
 text = "Exit
 "
 
-[connection signal="pressed" from="Menu/CenterRow/Buttons/NewMatch" to="Menu" method="_on_new_match_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/2PlayerMatch" to="Menu" method="_on_2_player_match_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/4PlayerMatch" to="Menu" method="_on_4_player_match_pressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Exit" to="Menu" method="_on_exit_pressed"]
+
+[editable path="Menu/CenterRow/Buttons/2PlayerMatch"]
+
+[editable path="Menu/CenterRow/Buttons/4PlayerMatch"]
 
 [editable path="Menu/CenterRow/Buttons/Exit"]

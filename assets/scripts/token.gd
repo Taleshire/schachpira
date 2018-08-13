@@ -2,6 +2,8 @@ extends Sprite
 
 var team_blue = preload("res://assets/sprites/stones/team_blue.png")
 var team_red = preload("res://assets/sprites/stones/team_red.png")
+var team_green = preload("res://assets/sprites/stones/team_green.png")
+var team_yellow = preload("res://assets/sprites/stones/team_yellow.png")
 
 export(int) var ACTIONS_MAX : int = 8
 
@@ -32,4 +34,8 @@ func _set_side(_side):
 		$TC.texture = team_red
 	if _side == 2:
 		$TC.texture = team_blue
+	if _side == 3:
+		$TC.texture = team_green
+	if _side == 4:
+		$TC.texture = team_yellow
 	
