@@ -53,18 +53,22 @@ func get_reachable_cells(_token : Sprite) -> Array:
 
 func _load_tokens():
 	var positions = map.start_positions
-	for i in range(positions.size()):
-		var p = positions[i]
-		var t = global.token_ids[i]
-		_load_token(t, p.SIDE, p.position)
+	for t in global.token_ids:
+		var p = map.get_next_start_position(t[0])
+		if !p:
+			continue
+		var token = t[1]
+		_place_token(token, p.SIDE, p)
 
-func _load_token(var _id : String, _side : int,  _position : Vector2):
+func _place_token(var _id : String, _side : int,  _position : Position2D):
 	var token = global.tokens[_id].scene.instance()
 	token.SIDE = _side
-	token.position = _position
-	map.block_cell(map.world_to_map(_position))
-	print("Token: ", _id, " at ", _position, " for side ", _side)
+	token.position = _position.position
+	_position.is_free = false
+	map.block_cell(map.world_to_map(_position.position))
+	
 	token_container.add_child(token)
+	print("Token: ", _id, " at ", _position, " for side ", _side)
 
 func _load_map() -> void:
 	map = global.maps[global.map_id].scene.instance()

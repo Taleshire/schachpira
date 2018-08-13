@@ -30,33 +30,29 @@ CAMERA = Vector2( 7, 14 )
 
 [node name="StartPosition1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 416, 864 )
-SIDE = 1
 
 [node name="StartPosition2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 544, 864 )
-SIDE = 1
 
 [node name="StartPosition3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 416, 992 )
-SIDE = 1
 
 [node name="StartPosition4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 544, 992 )
-SIDE = 1
 
 [node name="StartPosition5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 416, 96 )
-SIDE = 1
+SIDE = 2
 
 [node name="StartPosition6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 544, 96 )
-SIDE = 1
+SIDE = 2
 
 [node name="StartPosition7" parent="." instance=ExtResource( 3 )]
 position = Vector2( 416, 224 )
-SIDE = 1
+SIDE = 2
 
 [node name="StartPosition8" parent="." instance=ExtResource( 3 )]
 position = Vector2( 544, 224 )
-SIDE = 1
+SIDE = 2
 

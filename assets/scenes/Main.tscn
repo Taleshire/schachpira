@@ -33,7 +33,6 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin" ]
 
 [node name="Logo" type="TextureRect" parent="Menu"]
 anchor_left = 0.0
@@ -50,7 +49,6 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 2 )
 stretch_mode = 4
-_sections_unfolded = [ "Rect" ]
 
 [node name="CenterRow" type="HBoxContainer" parent="Menu"]
 anchor_left = 0.0
@@ -67,7 +65,6 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
 alignment = 0
-_sections_unfolded = [ "Size Flags" ]
 
 [node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
 anchor_left = 0.0
@@ -84,13 +81,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_constants/separation = 10
 alignment = 0
-_sections_unfolded = [ "Custom Constants", "Size Flags" ]
 
 [node name="NewMatch" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1040.0
 margin_bottom = 50.0
+focus_mode = -2
+action_mode = -1
+enabled_focus_mode = -2
 
 [node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 editor/display_folded = true
@@ -99,11 +98,13 @@ anchor_bottom = 0.0
 margin_top = 60.0
 margin_right = 1040.0
 margin_bottom = 110.0
+focus_mode = -2
+action_mode = -1
+enabled_focus_mode = -2
 
 [node name="Label" parent="Menu/CenterRow/Buttons/Exit" index="0"]
 text = "Exit
 "
-_sections_unfolded = [ "Custom Colors", "Custom Constants", "Custom Fonts", "custom_fonts/font" ]
 
 [connection signal="pressed" from="Menu/CenterRow/Buttons/NewMatch" to="Menu" method="_on_new_match_pressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Exit" to="Menu" method="_on_exit_pressed"]

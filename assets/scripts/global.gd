@@ -20,8 +20,8 @@ func _fill_token_dictionary():
 	tokens["silver"] = { 
 		scene = preload("res://assets/scenes/tokens/Silver.tscn")}
 
-func new_match(_map_id, _token_ids):
-	map_id = _map_id
-	token_ids = _token_ids
+func new_match(_map : String, _tokens : Array):
+	map_id = _map
+	token_ids = _tokens
 	var err = get_tree().change_scene("res://assets/scenes/Match.tscn")
 	print("NEW MATCH")

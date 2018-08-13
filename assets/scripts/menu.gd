@@ -4,20 +4,14 @@ func _on_new_match_pressed():
 	# CHOOS MAP
 	var map = "standard"
 	
-	# CHOOSE TOKENS
 	var tokens = [
-		
-		# TEAM 1
-		"gold",
-		"gold",
-		"gold",
-		"gold",
-		
-		# TEAM 2
-		"silver",
-		"silver",
-		"silver",
-		"silver",
+		[1, "gold"],
+		[1, "gold"],
+		[2, "silver"],
+		[2, "gold"],
+		[2, "silver"],
+		[2, "silver"],
+		[2, "silver"],
 	]
 	
 	# LOAD MATCH

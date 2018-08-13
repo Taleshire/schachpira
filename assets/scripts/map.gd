@@ -74,6 +74,19 @@ func map_to_world_centered(_cell : Vector2) -> Vector2:
 func get_camera_start_position() -> Vector2:
 	return map_to_world_centered(CAMERA)
 
+func get_start_positions(_side: int) -> Array:
+	var positions : Array = []
+	for p in start_positions:
+		if start_positions.SIDE == _side:
+			positions.append(p)
+	return positions
+
+func get_next_start_position(_side : int) -> Position2D:
+	for p in start_positions:
+		if p.SIDE == _side and p.is_free:
+			return p
+	return null
+
 # P R I V A T E   F U N C T I O N S
 
 func _generate_tiles() -> void:
