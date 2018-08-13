@@ -1,11 +1,22 @@
 extends Camera2D
 
-func _input(event):
-	if Input.is_action_just_pressed("ui_right"):
-		position += Vector2(64, 0)
-	if Input.is_action_just_pressed("ui_left"):
-		position += Vector2(-64, 0)
-	if Input.is_action_just_pressed("ui_up"):
-		position += Vector2(0, -64)
-	if Input.is_action_just_pressed("ui_down"):
-		position += Vector2(0, 64)
+const SPEED = 1000
+const BORDER = 100
+
+func _process(delta):
+	var width = get_viewport_rect().size.x / 2 - BORDER
+	var height = get_viewport_rect().size.y / 2 - BORDER
+	var mouse_position = get_local_mouse_position()
+	
+	if mouse_position.x > width:
+		var factor = abs(mouse_position.x - width) / BORDER 
+		position.x += SPEED * delta * factor
+	if mouse_position.x < -width:
+		var factor = abs(mouse_position.x + width) / BORDER 
+		position.x -= SPEED * delta * factor
+	if mouse_position.y > height:
+		var factor = abs(mouse_position.y - height) / BORDER 
+		position.y += SPEED * delta * factor
+	if mouse_position.y < -height:
+		var factor = abs(mouse_position.y + height) / BORDER 
+		position.y -= SPEED * delta * factor

@@ -4,8 +4,8 @@
 
 # I M P R O V E M E N T
 #	[x] change movement of tokens for precise walk
-#	[] smooth camera movement
-#	[] scroll camera with mouse on edges
+#	[x] smooth camera movement
+#	[x] scroll camera with mouse on edges
 
 
 # G E N E R A L
