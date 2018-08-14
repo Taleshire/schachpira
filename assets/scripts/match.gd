@@ -66,16 +66,15 @@ func _input(event):
 		
 		if click_right and not is_selection_locked:
 			_set_active_token(null)
-
+	
+	if Input.is_action_just_pressed("next_token"):
+		_get_next_unmoved_token()
+		
 func _process(delta):
 	if !is_in_menu:
 		draw.draw_selection()
 
 # P U B L I C   F U N C T I O N S
-
-func get_reachable_cells(_token : Sprite) -> Array:
-	var cell = map.world_to_map(_token.position)
-	return map.get_reachable_cells(cell, _token.actions)
 
 # P R I V A T E   F U N C T I O N S
 
@@ -162,7 +161,6 @@ func _add_to_active_token_path(_path : Array):
 func _clear_active_token_path():
 	active_token_path = []
 
-
 func _get_tokens_from_side(_side : int) -> Array:
 	var side_tokens = []
 	for token in tokens:
@@ -170,6 +168,28 @@ func _get_tokens_from_side(_side : int) -> Array:
 			side_tokens.append(token)
 	return side_tokens
 
+func _get_next_unmoved_token():
+	var after_current_token = false
+	var counter = 1
+	var side_tokens = _get_tokens_from_side(active_side)
+	for token in side_tokens:
+		if !active_token and token.actions > 0:
+			_set_active_token(token)
+			camera.position = active_token.position
+			print("Next Token ", counter)
+			return
+		elif token.actions > 0 and after_current_token:
+			_set_active_token(token)
+			camera.position = active_token.position
+			print("Next Token ", counter)
+			return
+		elif counter == side_tokens.size():
+			_set_active_token(null)
+			return
+		elif active_token:
+			if active_token.position == token.position:
+				after_current_token = true
+		counter += 1
 
 # S E T T E R
 

@@ -9,6 +9,9 @@
 #	[x] smooth camera movement
 #	[x] scroll camera with mouse on edges
 #	[x] optimize find path | draw path methods to be faster
+#	[x] press "n" to find tokens with actions left
+#	[] move _get_tokens_from_side and _get_next_unmoved_token to token container
+
 
 # G E N E R A L
 #	USER INTERFACE
@@ -31,6 +34,12 @@
 #		[x] exit game
 
 
+# N E T W O R K I N G
+#	[] join lobby
+#	[] create multiplayer match
+#	[] play multiplayer match
+
+
 # M O V E M E N T   S Y S T E M
 #	[x] tokens can move
 #	[x] tokens can only move as much as they have moves
@@ -40,7 +49,7 @@
 #	[x] make path editable
 #		[x] one click sets a checkpoint
 #		[x] another click on the same tile moves the actor
-#		[x] another click on another tile sets another checkpoint 
+#		[x] another click on another tile sets another checkpoint
 
 
 # T U R N   S Y S T E M
