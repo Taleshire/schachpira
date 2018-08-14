@@ -40,14 +40,15 @@ func get_reachable_cells_t(_token : Sprite) -> Array:
 	return reachable
 
 func get_reachable_cells(_start_cell: Vector2, _range : int) -> Array:
-	var reachable = []
-	for cell in get_used_cells():
-		var diff_x = abs(_start_cell.x - cell.x)
-		var diff_y = abs(_start_cell.y - cell.y)
-		if diff_x + diff_y > _range or tiles[_flatten_v(cell)].is_blocked:
-			continue
-		reachable.append(cell)
-	return reachable
+    var reachable = []
+    for cell in get_used_cells():
+        if abs(_start_cell.x - cell.x) > _range or abs(_start_cell.y - cell.y) > _range:
+            continue
+        var path = find_path_by_cell(_start_cell, cell)
+        if path.empty() or path.size() > _range:
+            continue
+        reachable.append(cell)
+    return reachable
 
 func unblock_cell(_cell : Vector2) -> void:
 	_connect_with_cardinal_neighbors(_cell)
@@ -103,7 +104,7 @@ func _generate_tiles() -> void:
 			tiles[id] = {
 					cell = cell,
 					weight = 1,
-					is_blocked = false,
+					is_blocked = false
 				}
 	_block_border_tiles()
 

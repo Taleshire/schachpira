@@ -15,8 +15,6 @@ onready var move_handler = $Handler/Move
 onready var map_container = $MapContainer
 onready var token_container = $TokenContainer
 
-onready var menu = $UI/Menu
-
 onready var draw = $Draw
 onready var camera = $Camera
 
@@ -32,20 +30,13 @@ func _ready():
 	
 var click_left
 var click_right
-var escape
 
 func _input(event):
 	click_left = Input.is_action_just_pressed("click_left")
 	click_right = Input.is_action_just_pressed("click_right")
-	escape = Input.is_action_just_pressed("escape")
-	
-	if escape:
-		menu.visible = !menu.visible
-		is_in_menu = menu.visible
-		camera.is_in_menu = menu.visible
 	
 	if event is InputEventMouseButton:
-		if click_left and not is_selection_locked and !is_in_menu:
+		if click_left and not is_selection_locked:
 			var mouse_cell = map.get_mouse_cell()
 			print(mouse_cell)
 			if active_token and !_is_token_at_cell(mouse_cell):
@@ -71,8 +62,7 @@ func _input(event):
 		_get_next_unmoved_token()
 		
 func _process(delta):
-	if !is_in_menu:
-		draw.draw_selection()
+	draw.draw_selection()
 
 # P U B L I C   F U N C T I O N S
 
@@ -161,17 +151,10 @@ func _add_to_active_token_path(_path : Array):
 func _clear_active_token_path():
 	active_token_path = []
 
-func _get_tokens_from_side(_side : int) -> Array:
-	var side_tokens = []
-	for token in tokens:
-		if token.side == _side:
-			side_tokens.append(token)
-	return side_tokens
-
 func _get_next_unmoved_token():
 	var after_current_token = false
 	var counter = 1
-	var side_tokens = _get_tokens_from_side(active_side)
+	var side_tokens = token_container.get_tokens(active_side)
 	for token in side_tokens:
 		if !active_token and token.actions > 0:
 			_set_active_token(token)
@@ -211,9 +194,18 @@ func _set_active_token(_token):
 
 func _set_active_side(_side):
 	active_side = _side
-	var side_tokens = _get_tokens_from_side(_side)
+	var side_tokens = token_container.get_tokens(_side)
 	for t in side_tokens:
 		t.turn_end()
+
+func _next_side():
+	_set_active_token(null)
+	if active_side == map.SIDES:
+		_set_active_side(1)
+	else:
+		_set_active_side(active_side + 1)
+	print("Turn Side ", active_side)
+	_get_next_unmoved_token()
 
 # O N   S I G N A L   F U N C T I O N S
 
@@ -226,9 +218,9 @@ func _on_move_token_arrived():
 	draw.clear_move_marker()
 	draw.clear_path_marker()
 	map.block_cell(_get_active_token_cell())
-	_set_active_token(null)
-	is_selection_locked = false
 	print("Token Stoppen Moving")
+	is_selection_locked = false
+	_next_side()
 
 func _on_move_token_started():
 	draw.clear_path_marker()
@@ -238,19 +230,7 @@ func _on_move_token_started():
 	print("Actions Left: ", active_token.actions)
 
 func _on_turn_end_pressed():
-	_set_active_side(active_side + 1)
-	if active_side > map.SIDES:
-		_set_active_side(1)
-	print("Turn Side ", active_side)
-
-func _on_quit_match_pressed():
-	get_tree().change_scene("res://assets/scenes/Main.tscn")
-
-func _on_resume_pressed():
-	menu.visible = !menu.visible
-	is_in_menu = menu.visible
-	camera.is_in_menu = menu.visible
-
+	_next_side()
 
 func _on_selection_position_changed():
 	if active_token and not is_selection_locked:

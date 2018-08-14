@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/scripts/match.gd" type="Script" id=1]
-[ext_resource path="res://assets/scripts/move_handler.gd" type="Script" id=2]
-[ext_resource path="res://assets/scenes/utils/Draw.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/fonts/Roboto.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://assets/scenes/utils/MenuButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/scripts/camera.gd" type="Script" id=6]
+[ext_resource path="res://assets/scripts/token_container.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/move_handler.gd" type="Script" id=3]
+[ext_resource path="res://assets/scenes/utils/Draw.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/fonts/Roboto.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/scripts/pause.gd" type="Script" id=6]
+[ext_resource path="res://assets/scenes/utils/MenuButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scripts/camera.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -14,7 +16,7 @@ outline_size = 0
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 4 )
+font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Match" type="Node2D"]
@@ -24,17 +26,18 @@ script = ExtResource( 1 )
 
 [node name="TokenContainer" type="Node2D" parent="."]
 z_index = 10
+script = ExtResource( 2 )
 _sections_unfolded = [ "Z Index" ]
 
 [node name="Handler" type="Node2D" parent="."]
 _sections_unfolded = [ "Z Index" ]
 
 [node name="Move" type="Node" parent="Handler"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="Fight" type="Node" parent="Handler"]
 
-[node name="Draw" parent="." instance=ExtResource( 3 )]
+[node name="Draw" parent="." instance=ExtResource( 4 )]
 editor/display_folded = true
 z_index = 5
 _sections_unfolded = [ "Script", "Transform", "Z Index" ]
@@ -86,7 +89,8 @@ flat = false
 align = 1
 _sections_unfolded = [ "Custom Fonts", "Rect", "custom_fonts/font" ]
 
-[node name="Menu" type="Control" parent="UI"]
+[node name="Pause" type="Control" parent="UI"]
+pause_mode = 2
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -98,8 +102,10 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 6 )
+_sections_unfolded = [ "Pause" ]
 
-[node name="Panel" type="Panel" parent="UI/Menu"]
+[node name="Panel" type="Panel" parent="UI/Pause"]
 modulate = Color( 1, 1, 1, 0.588235 )
 anchor_left = 0.0
 anchor_top = 0.0
@@ -113,7 +119,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Visibility" ]
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/Menu"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Pause"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -126,7 +132,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 use_top_left = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menu/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Pause/CenterContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -143,23 +149,25 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="Resume" parent="UI/Menu/CenterContainer/VBoxContainer" instance=ExtResource( 5 )]
+[node name="Resume" parent="UI/Pause/CenterContainer/VBoxContainer" instance=ExtResource( 7 )]
+pause_mode = 2
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 300.0
 margin_bottom = 50.0
 
-[node name="Label" parent="UI/Menu/CenterContainer/VBoxContainer/Resume" index="0"]
+[node name="Label" parent="UI/Pause/CenterContainer/VBoxContainer/Resume" index="0"]
 text = "Resume"
 
-[node name="QuitMatch" parent="UI/Menu/CenterContainer/VBoxContainer" instance=ExtResource( 5 )]
+[node name="QuitMatch" parent="UI/Pause/CenterContainer/VBoxContainer" instance=ExtResource( 7 )]
+pause_mode = 2
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 54.0
 margin_right = 300.0
 margin_bottom = 104.0
 
-[node name="Label" parent="UI/Menu/CenterContainer/VBoxContainer/QuitMatch" index="0"]
+[node name="Label" parent="UI/Pause/CenterContainer/VBoxContainer/QuitMatch" index="0"]
 text = "Quit Match"
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -185,18 +193,18 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 
 [connection signal="path_changed" from="Handler/Move" to="." method="_on_move_path_changed"]
 [connection signal="token_arrived" from="Handler/Move" to="." method="_on_move_token_arrived"]
 [connection signal="token_started" from="Handler/Move" to="." method="_on_move_token_started"]
 [connection signal="position_changed" from="Draw/Selection" to="." method="_on_selection_position_changed"]
 [connection signal="pressed" from="UI/HUD/TurnEnd" to="." method="_on_turn_end_pressed"]
-[connection signal="pressed" from="UI/Menu/CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="UI/Menu/CenterContainer/VBoxContainer/QuitMatch" to="." method="_on_quit_match_pressed"]
+[connection signal="pressed" from="UI/Pause/CenterContainer/VBoxContainer/Resume" to="UI/Pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/Pause/CenterContainer/VBoxContainer/QuitMatch" to="UI/Pause" method="_on_quit_match_pressed"]
 
 [editable path="Draw"]
 
-[editable path="UI/Menu/CenterContainer/VBoxContainer/Resume"]
+[editable path="UI/Pause/CenterContainer/VBoxContainer/Resume"]
 
-[editable path="UI/Menu/CenterContainer/VBoxContainer/QuitMatch"]
+[editable path="UI/Pause/CenterContainer/VBoxContainer/QuitMatch"]

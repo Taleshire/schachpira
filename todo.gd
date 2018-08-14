@@ -10,8 +10,8 @@
 #	[x] scroll camera with mouse on edges
 #	[x] optimize find path | draw path methods to be faster
 #	[x] press "n" to find tokens with actions left
-#	[] move _get_tokens_from_side and _get_next_unmoved_token to token container
-
+#	[x] move _get_tokens_from_side to token container
+#	[x] use get_tree().pause for pause menu
 
 # G E N E R A L
 #	USER INTERFACE
@@ -41,6 +41,7 @@
 
 
 # M O V E M E N T   S Y S T E M
+#	[x] move just one token in a turn!
 #	[x] tokens can move
 #	[x] tokens can only move as much as they have moves
 #	[x] recognize blocked tiles
