@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://sprites/tiles/border.png" type="Texture" id=1]
+[ext_resource path="res://sprites/tiles/base.png" type="Texture" id=2]
+[ext_resource path="res://sprites/tiles/red.png" type="Texture" id=3]
+[ext_resource path="res://sprites/tiles/blue.png" type="Texture" id=4]
+[ext_resource path="res://sprites/tiles/green.png" type="Texture" id=5]
+[ext_resource path="res://sprites/tiles/yellow.png" type="Texture" id=6]
+[ext_resource path="res://sprites/tiles/pink.png" type="Texture" id=7]
+[ext_resource path="res://sprites/tiles/violet.png" type="Texture" id=8]
+[ext_resource path="res://sprites/tiles/brown.png" type="Texture" id=9]
+[ext_resource path="res://sprites/tiles/grey.png" type="Texture" id=10]
+
+[node name="Tileset" type="Node2D" index="0"]
+
+[node name="Border" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Base" type="Sprite" parent="." index="1"]
+
+position = Vector2( 64, 0 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Red" type="Sprite" parent="." index="2"]
+
+position = Vector2( 0, 64 )
+texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Blue" type="Sprite" parent="." index="3"]
+
+position = Vector2( 64, 64 )
+texture = ExtResource( 4 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Green" type="Sprite" parent="." index="4"]
+
+position = Vector2( 128, 64 )
+texture = ExtResource( 5 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Yellow" type="Sprite" parent="." index="5"]
+
+position = Vector2( 192, 64 )
+texture = ExtResource( 6 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Pink" type="Sprite" parent="." index="6"]
+
+position = Vector2( 0, 128 )
+texture = ExtResource( 7 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Violet" type="Sprite" parent="." index="7"]
+
+position = Vector2( 64, 128 )
+texture = ExtResource( 8 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Brown" type="Sprite" parent="." index="8"]
+
+position = Vector2( 128, 128 )
+texture = ExtResource( 9 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="Grey" type="Sprite" parent="." index="9"]
+
+position = Vector2( 192, 128 )
+texture = ExtResource( 10 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+

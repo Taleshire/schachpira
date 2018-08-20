@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tilesets/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scripts/map.gd" type="Script" id=2]
+[ext_resource path="res://scenes/maps/StartPosition.tscn" type="PackedScene" id=3]
+
+[node name="Standard_2" type="TileMap" index="0"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 65536, 0, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 0, 0, 131072, 0, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 0, 0, 196608, 0, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 0, 0, 262144, 0, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 0, 0, 327680, 0, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 0, 0, 393216, 0, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 0, 0, 458752, 0, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Cell" ]
+
+[node name="PositionContainer" type="Node2D" parent="." index="0"]
+
+[node name="1_1" parent="PositionContainer" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 288, 480 )
+
+[node name="1_2" parent="PositionContainer" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 224, 480 )
+
+[node name="1_3" parent="PositionContainer" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 352, 480 )
+
+[node name="1_4" parent="PositionContainer" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 160, 480 )
+
+[node name="1_5" parent="PositionContainer" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 416, 480 )
+
+[node name="2_1" parent="PositionContainer" index="5" instance=ExtResource( 3 )]
+
+position = Vector2( 288, 96 )
+side = 2
+
+[node name="2_2" parent="PositionContainer" index="6" instance=ExtResource( 3 )]
+
+position = Vector2( 224, 96 )
+side = 2
+
+[node name="2_3" parent="PositionContainer" index="7" instance=ExtResource( 3 )]
+
+position = Vector2( 352, 96 )
+side = 2
+
+[node name="2_4" parent="PositionContainer" index="8" instance=ExtResource( 3 )]
+
+position = Vector2( 160, 96 )
+side = 2
+
+[node name="2_5" parent="PositionContainer" index="9" instance=ExtResource( 3 )]
+
+position = Vector2( 416, 96 )
+side = 2
+
+[node name="TokenContainer" type="Node2D" parent="." index="1"]
+
+

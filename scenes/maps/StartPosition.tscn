@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/start_position.gd" type="Script" id=1]
+
+[node name="StartPosition" type="Position2D" index="0"]
+
+script = ExtResource( 1 )
+side = 1
+
+
