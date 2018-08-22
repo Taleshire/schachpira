@@ -1,12 +1,13 @@
 extends Node2D
 
-signal player_defeated
+signal game_finished
 
+var player_side = 1
 var map = global.maps["standard_2"].scene.instance()
-var tokens = []
+sync var tokens = []
 
 var active_token = null
-var active_side = 1
+sync var active_side = 1
 
 onready var map_container = $MapContainer
 onready var draw = $Interface/Draw
@@ -17,7 +18,16 @@ func _ready():
 	_load_tokens()
 	tokens = map.token_container.get_children()
 	$Interface/Draw.game = self
-	print("GAME READY!")
+	if get_tree().is_network_server():
+		for t in tokens:
+			if t.side == 2:
+				t.set_network_master(get_tree().get_network_connected_peers()[0])
+	else:
+		player_side = 2
+		for t in tokens:
+			if t.side == 2:
+				t.set_network_master(get_tree().get_network_unique_id())
+	print("Player: ", player_side,  ", GAME READY!")
 
 var click_left
 var click_right
@@ -26,45 +36,43 @@ func _input(event):
 	click_left = Input.is_action_just_pressed("click_left")
 	click_right = Input.is_action_just_pressed("click_right")
 	
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and active_side == player_side:
 		if click_left:
 			var mouse_cell = map.get_mouse_cell()
 			print("Mouse Cell: ", mouse_cell)
 			if active_token and !_is_token_at_cell(mouse_cell):
 				if active_token.can_move_to(mouse_cell):
-					active_token.position = map.map_to_world_centered(mouse_cell)
-					_next_side()
-					_set_active_token(null)
+					active_token.move_to(map.map_to_world_centered(mouse_cell))
+					rpc("_next_side")
+					rpc("_set_active_token", null)
 			elif active_token and _is_token_at_cell(mouse_cell):
 				var token = _get_token_at_cell(mouse_cell)
 				if token.side == active_token.side:
 					if _is_same_cell_color(get_active_token_cell(), mouse_cell):
 						if token != active_token:
 							var temp_position = active_token.position
-							active_token.position = token.position
-							token.position = temp_position
-							_next_side()
-							_set_active_token(null)
+							active_token.move_to(token.position)
+							token.move_to(temp_position)
+							rpc("_next_side")
+							rpc("_set_active_token", null)
 				else:
 					if active_token.side != token.side and active_token.can_move_to(mouse_cell):
-						active_token.position = token.position
+						active_token.move_to(token.position)
 						if token.is_king:
-							game_over.label.text = str("PLAYER ", active_side, " WINS!")
-							game_over.show()
-						token.free()
-						tokens = map.token_container.get_children()
+							rpc("_game_over")
+						token.remove()
 						print("Token Removed. Tokens Left: ", tokens.size())
-						_next_side()
-						_set_active_token(null)
+						rpc("_next_side")
+						rpc("_set_active_token", null)
 					else:
 						print("Not Your Turn!")
 			else:
 				var token = _get_token_at_cell(mouse_cell)
 				if _is_token_at_cell(mouse_cell, active_side):
-					_set_active_token(token)
+					rpc("_set_active_token", token)
 		
 		elif click_right:
-			_set_active_token(null)
+			rpc("_set_active_token", null)
 			pass
 
 # P R I V A T E
@@ -104,6 +112,7 @@ func _is_same_cell_color(_cell_1, _cell_2):
 	return false
 
 func _is_token_at_cell(_cell, _side = 0):
+	tokens = map.token_container.get_children()
 	for t in tokens:
 		if t.position == map.map_to_world_centered(_cell):
 			if _side == 0:
@@ -119,12 +128,14 @@ func get_active_token_cell():
 	return null
 
 func _get_token_at_cell(_cell):
+	tokens = map.token_container.get_children()
 	for t in tokens:
 		if t.position == map.map_to_world_centered(_cell):
 			return t
 	return null
 
 func get_tokens(_side = 0):
+	tokens = map.token_container.get_children()
 	var side_tokens = []
 	if _side == 0:
 		return tokens
@@ -134,7 +145,7 @@ func get_tokens(_side = 0):
 				side_tokens.append(t)
 	return side_tokens
 
-func _set_active_token(_token):
+sync func _set_active_token(_token):
 	if active_token:
 		active_token.reduce()
 	active_token = _token
@@ -147,6 +158,10 @@ func _set_active_token(_token):
 	else:
 		draw.clear_move_marker()
 
-func _next_side():
+sync func _game_over():
+	game_over.label.text = str("PLAYER ", active_side, " WINS!")
+	game_over.show()
+
+sync func _next_side():
 	active_side = ((active_side) % map.sides) + 1
 	print("Next Side: ", active_side)

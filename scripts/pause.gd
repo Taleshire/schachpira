@@ -14,6 +14,8 @@ func _on_resume_pressed():
 	get_tree().paused = !get_tree().paused
 
 func _on_quit_game_pressed():
+	visible = !visible
 	get_tree().paused = !get_tree().paused
+	get_tree().set_network_peer(null)
 	get_tree().change_scene("res://scenes/Main.tscn")
 

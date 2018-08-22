@@ -15,7 +15,6 @@ func _ready():
 func new_game(_map, _tokens):
 	map_id = _map
 	token_ids = _tokens
-	get_tree().change_scene("res://scenes/Game.tscn")
 	print("NEW MATCH")
 
 # P R I V A T E

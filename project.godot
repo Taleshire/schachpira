@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 
 global="*res://scripts/global.gd"
 textures="*res://scripts/textures.gd"
+network="*res://scripts/network.gd"
 
 [display]
 

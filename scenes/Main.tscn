@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/interface/MenuButton.tscn" type="PackedScene" id=2]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -38,9 +38,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 158.0
-margin_top = 231.0
+margin_top = 201.0
 margin_right = 418.0
-margin_bottom = 345.0
+margin_bottom = 374.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -49,21 +49,31 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="NewGame" parent="Menu/Buttons" index="0" instance=ExtResource( 2 )]
+[node name="Singleplayer" parent="Menu/Buttons" index="0" instance=ExtResource( 2 )]
 
-[node name="Label" parent="Menu/Buttons/NewGame" index="0"]
+[node name="Label" parent="Menu/Buttons/Singleplayer" index="0"]
 
-text = "New Game"
+text = "Singleplayer"
 
-[node name="Quit" parent="Menu/Buttons" index="1" instance=ExtResource( 2 )]
+[node name="Multiplayer" parent="Menu/Buttons" index="1" instance=ExtResource( 2 )]
 
 margin_top = 59.0
 margin_bottom = 114.0
+
+[node name="Label" parent="Menu/Buttons/Multiplayer" index="0"]
+
+text = "Multiplayer"
+
+[node name="Quit" parent="Menu/Buttons" index="2" instance=ExtResource( 2 )]
+
+margin_top = 118.0
+margin_bottom = 173.0
 
 [node name="Label" parent="Menu/Buttons/Quit" index="0"]
 
 text = "Quit"
 
 
-[editable path="Menu/Buttons/NewGame"]
+[editable path="Menu/Buttons/Singleplayer"]
+[editable path="Menu/Buttons/Multiplayer"]
 [editable path="Menu/Buttons/Quit"]

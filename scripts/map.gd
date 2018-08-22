@@ -20,9 +20,6 @@ func _ready():
 		for x in range(size.x):
 			var cell = Vector2(x, y)
 			var id = _flatten(cell)
-			if get_cell(x, y) != 0:
-				randomize()
-				set_cell(x, y, randi()%5+2)
 			tiles[id] = {
 					color = get_cellv(cell),
 					is_occupied = false

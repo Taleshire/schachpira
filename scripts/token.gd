@@ -21,6 +21,19 @@ func can_move_to(_cell):
 			return true
 	return false
 
+func move_to(_position):
+	rpc("_update_position", _position)
+
+func remove():
+	rpc("_remove")
+
+sync func _remove():
+	print("Remove Token: ", name)
+	queue_free()
+
+sync func _update_position(_position):
+	position = _position
+
 func get_pattern_tiles():
 	return pattern
 
