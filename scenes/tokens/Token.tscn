@@ -7,8 +7,5 @@
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-pattern = [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
-
-[node name="TC" type="Sprite" parent="." index="0"]
 
 

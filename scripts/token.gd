@@ -53,14 +53,6 @@ func flip_token():
 
 func _set_side(_side):
 	side = _side
-	if _side == 1:
-		$TC.texture = textures.tc.red
 	if _side == 2:
-		$TC.texture = textures.tc.blue
-		flip_token()
-	if _side == 3:
-		$TC.texture = textures.tc.green
-	if _side == 4:
-		$TC.texture = textures.tc.violet
 		flip_token()
 	

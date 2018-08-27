@@ -36,16 +36,16 @@ func _player_connected(id):
 	print(id, " connected")
 	var map = "standard_2"
 	var tokens = [
-		[1, "sylvan"],
-		[1, "bear"],
-		[1, "wolf"],
-		[1, "raven"],
-		[1, "monkey"],
-		[2, "god"],
-		[2, "bear"],
-		[2, "rhino"],
-		[2, "rooster"],
-		[2, "raven"],
+		[1, "00"],
+		[1, "08"],
+		[1, "10"],
+		[1, "12"],
+		[1, "14"],
+		[2, "01"],
+		[2, "09"],
+		[2, "11"],
+		[2, "13"],
+		[2, "15"],
 	]
 	global.new_game(map, tokens)
 	get_tree().change_scene("res://scenes/Game.tscn")
