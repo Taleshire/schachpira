@@ -2,7 +2,6 @@ extends Control
 
 # O V E R R I D E
 
-# TEST COMMENT
 func _ready():
 	$Menu/Buttons/Singleplayer.connect("pressed", self, "_on_singleplayer_pressed")
 	$Menu/Buttons/Multiplayer.connect("pressed", self, "_on_multiplayer_pressed")
