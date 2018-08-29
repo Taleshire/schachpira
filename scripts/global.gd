@@ -50,7 +50,7 @@ func _fill_token_dictionary():
 		is_king = true
 	}
 	tokens["02"] = {
-		scene = preload("res://scenes/tokens/04.tscn"),
+		scene = preload("res://scenes/tokens/02.tscn"),
 		pattern = [
 			Vector2(-2, -2),
 			Vector2(2, -2),
@@ -61,7 +61,7 @@ func _fill_token_dictionary():
 		is_king = true
 	}
 	tokens["03"] = {
-		scene = preload("res://scenes/tokens/02.tscn"),
+		scene = preload("res://scenes/tokens/03.tscn"),
 		pattern = [
 			Vector2(-2, -2),
 			Vector2(2, -2),
@@ -72,7 +72,7 @@ func _fill_token_dictionary():
 		is_king = true
 	}
 	tokens["04"] = {
-		scene = preload("res://scenes/tokens/05.tscn"),
+		scene = preload("res://scenes/tokens/04.tscn"),
 		pattern = [
 			Vector2(0, -2),
 			Vector2(0, -1),
@@ -83,7 +83,7 @@ func _fill_token_dictionary():
 		is_king = true
 	}
 	tokens["05"] = {
-		scene = preload("res://scenes/tokens/03.tscn"),
+		scene = preload("res://scenes/tokens/05.tscn"),
 		pattern = [
 			Vector2(0, -2),
 			Vector2(1, -1),
@@ -94,7 +94,7 @@ func _fill_token_dictionary():
 		is_king = true
 	}
 	tokens["06"] = {
-		scene = preload("res://scenes/tokens/07.tscn"),
+		scene = preload("res://scenes/tokens/06.tscn"),
 		pattern = [
 			Vector2(-1, -2),
 			Vector2(1, -2),
@@ -103,7 +103,7 @@ func _fill_token_dictionary():
 		is_king = false
 	}
 	tokens["07"] = {
-		scene = preload("res://scenes/tokens/08.tscn"),
+		scene = preload("res://scenes/tokens/07.tscn"),
 		pattern = [
 			Vector2(-2, -1),
 			Vector2(-2, 1),
@@ -112,7 +112,7 @@ func _fill_token_dictionary():
 		is_king = false
 	}
 	tokens["08"] = {
-		scene = preload("res://scenes/tokens/06.tscn"),
+		scene = preload("res://scenes/tokens/08.tscn"),
 		pattern = [
 			Vector2(0, -2),
 			Vector2(-2, -1),
