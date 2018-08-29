@@ -1,7 +1,5 @@
 extends Node
 
-const DEFAULT_PORT = 8910
-
 # O V E R R I D E
 
 func _ready():
@@ -13,20 +11,20 @@ func _ready():
 
 # P U B L I C
 
-func create_server():
+func create_server(_port):
 	var host = NetworkedMultiplayerENet.new()
-	var err = host.create_server(DEFAULT_PORT, 1)
+	var err = host.create_server(_port, 1)
 	if (err!=OK):
 		return false
 	get_tree().set_network_peer(host)
 	return true
 
 
-func create_client(_ip):
+func create_client(_ip, _port):
 	if not _ip.is_valid_ip_address():
 		return false
 	var host = NetworkedMultiplayerENet.new()
-	host.create_client(_ip, DEFAULT_PORT)
+	host.create_client(_ip, _port)
 	get_tree().set_network_peer(host)
 	return true
 

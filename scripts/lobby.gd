@@ -27,12 +27,14 @@ func _set_status(text,isok):
 # O N   S I G N A L
 
 func _on_join_pressed():
-	var ip = $CC/VBoxContainer/IP/Adress.get_text()
-	network.create_client(ip)
+	var ip = $CC/VBoxContainer/IP/Adress.text
+	var port = $CC/VBoxContainer/IP/Port.text
+	network.create_client(ip, int(port))
 	_set_status("Connecting..", true)
 
 func _on_host_pressed():
-	network.create_server()
+	var port = $CC/VBoxContainer/IP/Port.text
+	network.create_server(int(port))
 	$CC/VBoxContainer/Buttons/Join.set_disabled(true)
 	$CC/VBoxContainer/Buttons/Host.set_disabled(true)
 	_set_status("Waiting for player..", true)
