@@ -2,12 +2,13 @@ extends Node2D
 
 signal game_finished
 
-var player_side = 1
+var player = 1
 var map = global.maps["standard_2"].scene.instance()
 sync var tokens = []
 
 var active_token = null
 sync var active_side = 1
+sync var active_player = 1
 
 onready var map_container = $MapContainer
 onready var draw = $Interface/Draw
@@ -22,12 +23,12 @@ func _ready():
 		for t in tokens:
 			if t.side == 2:
 				t.set_network_master(get_tree().get_network_connected_peers()[0])
-	else:
-		player_side = 2
+	elif get_tree().has_network_peer():
+		player = 2
 		for t in tokens:
 			if t.side == 2:
 				t.set_network_master(get_tree().get_network_unique_id())
-	print("Player: ", player_side,  ", GAME READY!")
+	print("Player: ", player,  ", GAME READY!")
 
 var click_left
 var click_right
@@ -36,7 +37,7 @@ func _input(event):
 	click_left = Input.is_action_just_pressed("click_left")
 	click_right = Input.is_action_just_pressed("click_right")
 	
-	if event is InputEventMouseButton and active_side == player_side:
+	if event is InputEventMouseButton and active_player == player:
 		if click_left:
 			var mouse_cell = map.get_mouse_cell()
 			print("Mouse Cell: ", mouse_cell)
@@ -99,7 +100,11 @@ func _place_token(var _id, _side,  _position):
 func _load_map():
 	map = global.maps[global.map_id].scene.instance()
 	map.camera_start_position = global.maps[global.map_id].camera_start_position
-	map.sides = global.maps[global.map_id].sides
+	if get_tree().has_network_peer():
+		map.sides = global.maps[global.map_id].sides_mp
+	else:
+		map.sides = global.maps[global.map_id].sides
+		
 	map.game = self
 	print(global.map_id, " loaded")
 	map_container.add_child(map)
@@ -159,9 +164,11 @@ sync func _set_active_token(_token):
 		draw.clear_move_marker()
 
 sync func _game_over():
-	game_over.label.text = str("PLAYER ", active_side, " WINS!")
+	game_over.label.text = str("SIDE ", active_side, " WINS!")
 	game_over.show()
 
 sync func _next_side():
-	active_side = ((active_side) % map.sides) + 1
+	active_side = ((active_side) % map.get_side_count()) + 1
+	active_player = map.sides[active_side-1]
 	print("Next Side: ", active_side)
+	print("Player: ", active_player)

@@ -8,7 +8,7 @@ var tiles = {}
 var game = null
 
 var camera_start_position = null
-var sides = null
+var sides = []
 
 onready var token_container = $TokenContainer
 onready var token_positions = $PositionContainer.get_children()
@@ -68,7 +68,11 @@ func get_cell_color():
 	return get_cellv(get_mouse_cell())
 
 func get_side_count():
-	return sides
+	return sides.size()
+
+func assign_player(_side, _player):
+	sides[_side-1] = _player
+
 
 # P R I V A T E
 

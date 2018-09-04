@@ -22,7 +22,8 @@ func new_game(_map, _tokens):
 func _fill_map_dictionary():
 	maps["standard_2"] = {
 		scene = preload("res://scenes/maps/Standard_2.tscn"),
-		sides = 2,
+		sides = [1, 1],
+		sides_mp = [1, 2],
 		camera_start_position = Vector2(4, 4)
 	}
 
